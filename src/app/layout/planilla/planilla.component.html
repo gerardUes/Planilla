@@ -1,1 +1,95 @@
-<p>planilla works!</p>
+<div class="row">
+    <div class="col-xl-12 text-xs-center">
+        <div class="card mb-3">
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table">
+                        <thead style="background-color: black;color: white;">
+                            <tr>
+                              <th>Planilla</th>
+                              <th># Planilla</th>
+                              <th>Año</th>
+                              <th>Mes</th>
+                              <th>Fecha Inicial</th>
+                              <th>Fecha Final</th>
+                              <th>Estado</th>
+                              
+                            </tr>
+                          </thead>
+                          <tbody>
+                            <tr *ngFor="let planilla of listadoPlanilla" (click)="verDetalle(planilla)" (click)="open(content)" >
+                                <td>
+                                {{planilla.tiposPlanilla.nomTipopla}}
+                                </td>
+                                <td>
+                                    {{planilla.numPlanilla}}
+                                </td>
+                                <td>
+                                    {{planilla.anio}}
+                                </td>
+                                <td>
+                                    {{planilla.mes}}
+                                </td>
+                                <td>
+                                    {{planilla.fechaInicial}}
+                                </td>
+                                <td>
+                                    {{planilla.fechaFinal}}
+                                </td>
+                                
+                                <td>
+                                    {{planilla.status}}
+                                </td>
+                                
+
+                            </tr>
+                          </tbody>
+                    </table>
+                  </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+
+<ng-template #content let-c="close" let-d="dismiss">
+    <div class="modal-header">
+        <h4 class="modal-title">Resumen Asistencia</h4>
+        <button (click)="d('Cross click')" aria-label="Close" class="close" type="button">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+    
+        <div class="table-responsive">
+            <table class="table table-hover">
+                <thead style="background-color: black;color: white;">
+                  <tr>
+                    <th scope="col">Cantidad</th>
+                    <th scope="col">Cod dp</th>
+                    <th scope="col">Descripcion</th>
+                    <th scope="col">Monto</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let item of listaResumen" >
+                    <th scope="row">{{item.cantidad}}</th>
+                    <td>{{item.codDp}}</td>
+                    <td>{{item.descripcion}}</td>
+                    <td>{{item.monto | currency }}</td>
+                  </tr>
+                </tbody>
+              </table>
+          </div>
+
+
+    </div>
+    <div class="modal-footer">
+        <button (click)="c('Close click')" class="btn btn-secondary" type="button">Cerrar</button>
+    </div>
+</ng-template>

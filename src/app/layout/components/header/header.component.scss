@@ -4,7 +4,10 @@ $topnav-background-color: blue;
         background-color: $topnav-background-color;
 
         .navbar-brand {
-            color: #fff;
+            color: rgb(255, 255, 255);
+            font-weight: bolder;
+            font-family: 'Times New Roman', Times, serif;
+            letter-spacing: 2px;
         }
 
         .nav-item > a {

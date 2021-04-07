@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { NgbModal,ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 import { PlanillaService } from '../servicio/planilla.service';
 
@@ -12,7 +13,7 @@ export class PlanillaComponent implements OnInit {
   listaResumen:Array<any>;
   closeResult: string;
 
-  constructor(private servicio:PlanillaService,private modalService: NgbModal) { 
+  constructor(private servicio:PlanillaService,private modalService: NgbModal,private router:Router) {
 
     let deadline:Date = new Date();
     console.log(deadline);
@@ -60,5 +61,12 @@ private getDismissReason(reason: any): string {
         return `with: ${reason}`;
     }
 }
+
+
+irFormularioPlanilla(){
+    this.router.navigate(['/formPlanilla']);
+}
+
+
 
 }

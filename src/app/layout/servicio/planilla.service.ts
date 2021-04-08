@@ -11,10 +11,14 @@ export class PlanillaService {
   baseUrl:any='http://138.128.245.244:8445/infosweb/api/v1/rrhh/planilla/';
 
 
-  constructor(private http:HttpClient) { 
+  constructor(private http:HttpClient) {
 
 
 
+  }
+
+  guardarPlanilla(objeto:any):Observable<any>{
+    return this.http.post(this.baseUrl+'crear-programacion-pla',objeto);
   }
 
 obtenerPlanillas(mes:any,anio:any):Observable<any>{

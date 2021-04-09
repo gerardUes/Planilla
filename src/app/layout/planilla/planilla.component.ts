@@ -12,9 +12,14 @@ export class PlanillaComponent implements OnInit {
   listadoPlanilla:Array<any>;
   listaResumen:Array<any>;
   closeResult: string;
+  verResumenPlanilla:boolean=false;
+  listaHorasExtras:Array<any>;
+  public objetoTotales:any;
 
-  constructor(private servicio:PlanillaService,private modalService: NgbModal,private router:Router) {
 
+  constructor(public servicio:PlanillaService,private modalService: NgbModal,private router:Router) {
+
+    this.verResumenPlanilla=false;
     let deadline:Date = new Date();
     console.log(deadline);
     console.log(deadline.getDate());
@@ -24,7 +29,7 @@ export class PlanillaComponent implements OnInit {
 
     this.servicio.obtenerPlanillas(deadline.getMonth(),deadline.getFullYear())
     .subscribe(dat=>{
-      console.log(JSON.stringify(dat));
+     // console.log(JSON.stringify(dat));
       this.listadoPlanilla=dat;
     })
 
@@ -34,11 +39,38 @@ export class PlanillaComponent implements OnInit {
   }
 
   verDetalle(data:any){
+  /*console.log('data:'+JSON.stringify(data));
   this.servicio.obtenerResumen(data.mes,data.anio,data.tiposPlanilla.tiposPlanillaPK.codTipopla,data.numPlanilla).subscribe(
     resume=>{
       this.listaResumen=resume;
     }
-  );
+  );*/
+
+  this.verResumenPlanilla=true;
+
+  this.servicio.objetoPlanillaServicio=data;
+
+
+    this.servicio.obtenerHorasXtras(data.programacionPlaPK.codCia,
+        data.programacionPlaPK.periodo,data.programacionPlaPK.secuencia,data.programacionPlaPK.codTipopla).
+        subscribe(
+            horasExtras=>{
+                this.listaHorasExtras=horasExtras;
+                //console.log('Valor de horas extras:'+JSON.stringify(horasExtras));
+            }
+        );
+
+        this.servicio.obtenerTotalesPlanilla(data.programacionPlaPK.codCia,
+            data.programacionPlaPK.periodo,data.programacionPlaPK.secuencia,data.programacionPlaPK.codTipopla).
+            subscribe(
+                totalesPlanilla=>{
+                 this.asignarTotales(totalesPlanilla);
+
+//console.log('TOTALES :'+JSON.stringify(totalesPlanilla));
+                }
+            );
+//console.log('valor del objeto planilla service:'+JSON.stringify(this.servicio.objetoPlanillaServicio));
+
   }
 
   open(content) {
@@ -67,6 +99,13 @@ irFormularioPlanilla(){
     this.router.navigate(['/formPlanilla']);
 }
 
+resetPantalla(){
+    this.verResumenPlanilla=!this.verResumenPlanilla;
+}
+
+asignarTotales(data:any){
+this.objetoTotales=data;
+}
 
 
 }

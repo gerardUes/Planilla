@@ -3,9 +3,7 @@ export class ProgramacionPlaPK{
     codTipopla:number;
     periodo:number;
     secuencia:number;
-    constructor(){
 
-    }
 
 
 }

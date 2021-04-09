@@ -2,7 +2,8 @@ import { PeriodicidadPla } from './PeriodicidadPla';
 import { ProgramacionPlaPK } from './ProgramacionPlaPK';
 import { TiposPlanilla } from './TiposPlanilla';
 
-export class ProgramacionPla {
+
+ export class ProgramacionPla {
     anio: number;
     anioReportar: number;
     codEmpRealiza: number;

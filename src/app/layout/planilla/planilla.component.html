@@ -3,10 +3,13 @@
         <button type="button" class="btn btn-outline-primary" (click)="irFormularioPlanilla()">
             <i class="fa fa-plus form-control-feedback"></i> &nbsp;Nuevo Registro
         </button>
+        <button *ngIf="verResumenPlanilla" type="button" class="btn btn-outline-primary ml-3"  (click)="resetPantalla()">
+            <i class="fa fa-plus form-control-feedback"></i> &nbsp;Ir a Listado
+        </button>
     </div>
 </div>
 
-<div class="row my-2">
+<div class="row my-2" *ngIf="!verResumenPlanilla">
     <div class="col-xl-12 text-xs-center">
         <div class="card mb-3">
             <div class="card-body">
@@ -24,8 +27,9 @@
 
                             </tr>
                           </thead>
+                          <!---(click)="open(content)"-->
                           <tbody>
-                            <tr *ngFor="let planilla of listadoPlanilla" (click)="verDetalle(planilla)" (click)="open(content)" >
+                            <tr *ngFor="let planilla of listadoPlanilla" (click)="verDetalle(planilla)"  >
                                 <td>
                                 {{planilla.tiposPlanilla.nomTipopla}}
                                 </td>
@@ -54,6 +58,119 @@
                           </tbody>
                     </table>
                   </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="row my-2" *ngIf="verResumenPlanilla">
+    <div class="col-xl-12 text-xs-center">
+        <div class="card mb-3">
+            <div class="card-header" style="background-color:blue;color: white;" >
+                <h5>Planilla</h5>
+            </div>
+            <div class="card-body">
+                <div class="row" style="background-color:blue;color: white;">
+                    <div class="col-xs-4 col-sm-4">
+                        <h6><strong>Planilla:</strong> {{servicio.objetoPlanillaServicio.tiposPlanilla.nomTipopla}} </h6>
+                    </div>
+                    <div class="col-xs-4 col-sm-4">
+                        <h6><strong>Año:</strong> {{servicio.objetoPlanillaServicio.anio}} </h6>
+                    </div>
+                    <div class="col-xs-4 col-sm-4">
+                        <h6><strong>Año:</strong> {{servicio.objetoPlanillaServicio.anio}} </h6>
+                    </div>
+                    <div class="col-xs-4 col-sm-4">
+                        <h6><strong>Mes:</strong> {{servicio.objetoPlanillaServicio.mes}} </h6>
+                    </div>
+                    <div class="col-xs-4 col-sm-4">
+                        <h6><strong>Numero:</strong> {{servicio.objetoPlanillaServicio.numPlanilla}} </h6>
+                    </div>
+                    <div class="col-xs-4 col-sm-4">
+                        <h6><strong>Periodo:</strong> {{servicio.objetoPlanillaServicio.quincena}} </h6>
+                    </div>
+                    <div class="col-xs-4 col-sm-4">
+                        <h6><strong>Fecha Inicio:</strong> {{servicio.objetoPlanillaServicio.fechaInicial}} </h6>
+                    </div>
+                    <div class="col-xs-4 col-sm-4">
+                        <h6><strong>Fecha Fin:</strong> {{servicio.objetoPlanillaServicio.fechaFinal}} </h6>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row my-2" *ngIf="verResumenPlanilla">
+    <div class="col-xl-12 text-xs-center">
+        <div class="card mb-3">
+            <div class="card-header" style="background-color:blue;color: white;" >
+                <h5>Detalle Planilla</h5>
+            </div>
+            <div class="card-body">
+                <div class="row" style="background-color:blue;color: white;" *ngIf="objetoTotales">
+                    <div class="col-xs-4 col-sm-4">
+                        <h6><strong>Sueldo Bruto:</strong> {{objetoTotales.sueldoBase | currency }} </h6>
+                    </div>
+                    <div class="col-xs-4 col-sm-4">
+                        <h6><strong>Comisiones:</strong> {{objetoTotales.comisiones | currency}} </h6>
+                    </div>
+                    <div class="col-xs-4 col-sm-4">
+                        <h6><strong>Prestaciones:</strong> {{objetoTotales.prestaciones | currency}} </h6>
+                    </div>
+                    <div class="col-xs-4 col-sm-4">
+                        <h6><strong>Horas Extras:</strong> {{objetoTotales.chHdNocturnidad | currency}} </h6>
+                    </div>
+                    <div class="col-xs-4 col-sm-4">
+                        <h6><strong>Devengado:</strong> {{objetoTotales.totDebenga | currency}} </h6>
+                    </div>
+                    <div class="col-xs-4 col-sm-4">
+                        <h6><strong>Deducciones:</strong> {{objetoTotales.deducciones | currency}} </h6>
+                    </div>
+                    <div class="col-xs-4 col-sm-4">
+                        <h6><strong>Liquido:</strong> {{objetoTotales.liqRecibir | currency}} </h6>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="row my-2" *ngIf="verResumenPlanilla">
+    <div class="col-xl-12 text-xs-center">
+        <div class="card mb-3">
+            <div class="card-header" style="background-color:blue;color: white;">
+                <h5>Horas extras</h5>
+            </div>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table table-hover">
+                        <thead>
+                          <tr>
+                            <th scope="col">cod emp</th>
+                            <th scope="col">Nombre</th>
+                            <th scope="col">Simples</th>
+                            <th scope="col">Dobles</th>
+                            <th scope="col">Medica simple</th>
+                            <th scope="col">Medica doble</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr *ngFor="let item of listaHorasExtras">
+                            <th scope="row">{{item.empleados.empleadosPK.codEmp}}</th>
+                            <td>{{item.empleados.nombres}} {{item.empleados.apellidos}}</td>
+                            <td style="text-align: right;">{{item.vhXsencilla | currency }}</td>
+                            <td style="text-align: right;" >{{item.vhXdoble | currency }}</td>
+                            <td style="text-align: right;" >{{item.vhX150 | currency}}</td>
+                            <td style="text-align: right;" >{{item.vhX250 | currency }}</td>
+                          </tr>
+
+                        </tbody>
+                      </table>
+                </div>
             </div>
         </div>
     </div>

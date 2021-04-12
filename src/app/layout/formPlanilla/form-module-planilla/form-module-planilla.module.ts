@@ -9,7 +9,7 @@ import { NgbDate, NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 
 @NgModule({
-  declarations: [FormPlanillaComponent],
+  declarations: [FormPlanillaComponent,],
   imports: [NgbModule,
     CommonModule,FormPlanillaRoutingModule,FormsModule,ReactiveFormsModule
   ],

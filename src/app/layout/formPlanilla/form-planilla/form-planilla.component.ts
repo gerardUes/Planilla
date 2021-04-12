@@ -96,11 +96,9 @@ export class FormPlanillaComponent implements OnInit {
         objetoPlanilla.anio=Number(this.planillaForm.get('anio').value);
         objetoPlanilla.mes=Number(this.planillaForm.get('mese').value);
         const fechaConstDate=this.fechaInicial;
-        let fechaInicialDate=new Date(fechaConstDate.year,fechaConstDate.month,fechaConstDate.day);
-        objetoPlanilla.fechaInicial=fechaInicialDate;
+        objetoPlanilla.fechaInicial=fechaConstDate.day+'/'+fechaConstDate.month+'/'+fechaConstDate.year;
         const fechaFinalConstDate=this.fechaFinal;
-        let fechaFinalDate=new Date(fechaFinalConstDate.year,fechaFinalConstDate.month,fechaFinalConstDate.day);
-        objetoPlanilla.fechaFinal=fechaFinalDate;
+        objetoPlanilla.fechaFinal=fechaFinalConstDate.day+'/'+fechaFinalConstDate.month+'/'+fechaFinalConstDate.year;
         objetoPlanilla.tiposPlanilla=new TiposPlanilla();
         objetoPlanilla.tiposPlanilla.tiposPlanillaPK=new TiposPlanillaPK();
         objetoPlanilla.tiposPlanilla.tiposPlanillaPK.codCia=3;
@@ -134,6 +132,11 @@ export class FormPlanillaComponent implements OnInit {
 
 irPlanilla(){
     this.router.navigate(['./planilla'])
+}
+
+
+editarPlanilla(){
+
 }
 
 

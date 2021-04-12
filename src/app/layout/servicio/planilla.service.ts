@@ -33,6 +33,13 @@ export class PlanillaService {
   }
 
 
+  EditarPlanilla(objeto:any):Observable<any>{
+    return this.http.put(this.baseUrl+'editar-programacion-pla',objeto);
+  }
+
+
+
+
   obtenerTiposPlanilla(cia:any,rol:any):Observable<any>{
     return this.http.get('http://138.128.245.244:8445/infosweb/api/v1/rrhh/planilla/tipos-pla-by-rol/'+cia+'/'+rol);
   }

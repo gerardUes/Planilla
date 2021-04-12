@@ -6,11 +6,35 @@
         <button *ngIf="verResumenPlanilla" type="button" class="btn btn-outline-primary ml-3"  (click)="resetPantalla()">
             <i class="fa fa-plus form-control-feedback"></i> &nbsp;Ir a Listado
         </button>
+
+        <button *ngIf="verResumenPlanilla" type="button" class="btn btn-outline-primary ml-3"  (click)="irEditar()">
+            <i class="fa fa-plus form-control-feedback"></i> &nbsp;Ir Editar
+        </button>
+
     </div>
 </div>
 
-<div class="row my-2" *ngIf="!verResumenPlanilla">
-    <div class="col-xl-12 text-xs-center">
+<div class="row my-2" *ngIf="!verResumenPlanilla && !flagEditar">
+    <div class="col-xl-3 text-xs-center">
+        <label><strong>Año:</strong></label>
+        <input class="form-control" [(ngModel)]="anioConsulta" />
+    </div>
+
+    <div class="col-xl-3 text-xs-center">
+        <label><strong>Mes:</strong></label>
+        <select class="form-control" [(ngModel)]="mesConsulta" >
+            <option [value]="mes.valor" *ngFor="let mes of meses">{{mes.mes}}</option>
+        </select>
+
+    </div>
+
+    <div class="col-xl-6 text-xs-center">
+        <button class="btn btn-outline-primary my-4" (click)="filtroPantalla()">
+        Buscar&nbsp;<i class="fa fa-search" aria-hidden="true"></i>
+        </button>
+    </div>
+
+    <div class="col-xl-12 text-xs-center my-1">
         <div class="card mb-3">
             <div class="card-body">
                 <div class="table-responsive">
@@ -29,7 +53,7 @@
                           </thead>
                           <!---(click)="open(content)"-->
                           <tbody>
-                            <tr *ngFor="let planilla of listadoPlanilla" (click)="verDetalle(planilla)"  >
+                            <tr *ngFor="let planilla of listadoPlanilla" (click)="verDetalle(planilla)"   >
                                 <td>
                                 {{planilla.tiposPlanilla.nomTipopla}}
                                 </td>
@@ -50,7 +74,10 @@
                                 </td>
 
                                 <td>
-                                    {{planilla.status}}
+
+                                    <span *ngIf="planilla.status=='G'">Generada</span>
+                                    <span *ngIf="planilla.status=='C'">Cerrada</span>
+
                                 </td>
 
 
@@ -65,7 +92,7 @@
 
 
 
-<div class="row my-2" *ngIf="verResumenPlanilla">
+<div class="row my-2" *ngIf="verResumenPlanilla && !flagEditar">
     <div class="col-xl-12 text-xs-center">
         <div class="card mb-3">
             <div class="card-header" style="background-color:blue;color: white;" >
@@ -103,7 +130,7 @@
     </div>
 </div>
 
-<div class="row my-2" *ngIf="verResumenPlanilla">
+<div class="row my-2" *ngIf="verResumenPlanilla && !flagEditar ">
     <div class="col-xl-12 text-xs-center">
         <div class="card mb-3">
             <div class="card-header" style="background-color:blue;color: white;" >
@@ -139,7 +166,7 @@
 </div>
 
 
-<div class="row my-2" *ngIf="verResumenPlanilla">
+<div class="row my-2" *ngIf="verResumenPlanilla && !flagEditar">
     <div class="col-xl-12 text-xs-center">
         <div class="card mb-3">
             <div class="card-header" style="background-color:blue;color: white;">
@@ -176,6 +203,8 @@
     </div>
 </div>
 
+
+<app-editar-planilla [mostrarFormEdicion]="flagEditar"></app-editar-planilla>
 
 
 

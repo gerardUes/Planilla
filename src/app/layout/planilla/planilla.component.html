@@ -92,38 +92,37 @@
 
 
 
-<div class="row my-2" *ngIf="verResumenPlanilla && !flagEditar">
-    <div class="col-xl-12 text-xs-center">
-        <div class="card mb-3">
-            <div class="card-header" style="background-color:blue;color: white;" >
-                <h5>Planilla</h5>
-            </div>
-            <div class="card-body">
-                <div class="row" style="background-color:blue;color: white;">
-                    <div class="col-xs-4 col-sm-4">
-                        <h6><strong>Planilla:</strong> {{servicio.objetoPlanillaServicio.tiposPlanilla.nomTipopla}} </h6>
-                    </div>
-                    <div class="col-xs-4 col-sm-4">
-                        <h6><strong>Año:</strong> {{servicio.objetoPlanillaServicio.anio}} </h6>
-                    </div>
-                    <div class="col-xs-4 col-sm-4">
-                        <h6><strong>Año:</strong> {{servicio.objetoPlanillaServicio.anio}} </h6>
-                    </div>
-                    <div class="col-xs-4 col-sm-4">
-                        <h6><strong>Mes:</strong> {{servicio.objetoPlanillaServicio.mes}} </h6>
-                    </div>
-                    <div class="col-xs-4 col-sm-4">
-                        <h6><strong>Numero:</strong> {{servicio.objetoPlanillaServicio.numPlanilla}} </h6>
-                    </div>
-                    <div class="col-xs-4 col-sm-4">
-                        <h6><strong>Periodo:</strong> {{servicio.objetoPlanillaServicio.quincena}} </h6>
-                    </div>
-                    <div class="col-xs-4 col-sm-4">
-                        <h6><strong>Fecha Inicio:</strong> {{servicio.objetoPlanillaServicio.fechaInicial}} </h6>
-                    </div>
-                    <div class="col-xs-4 col-sm-4">
-                        <h6><strong>Fecha Fin:</strong> {{servicio.objetoPlanillaServicio.fechaFinal}} </h6>
-                    </div>
+<div class="row my-2 col-xl-12 text-xs-center" *ngIf="verResumenPlanilla && !flagEditar" style="border-radius: 10px;background-color: rgb(107, 213, 245);">
+    <div class="card mb-3" style="background-color: rgb(107, 213, 245);"
+    >
+        <div class="card-header" style="border-radius: 10px;background-color: rgb(107, 213, 245);color: white;" >
+            <h5>Planilla</h5>
+        </div>
+        <div class="card-body">
+            <div class="row" style="border-radius: 10px;background-color: rgb(107, 213, 245);color: white;">
+                <div class="col-xs-4 col-sm-4">
+                    <h6><strong>Planilla:</strong> {{servicio.objetoPlanillaServicio.tiposPlanilla.nomTipopla}} </h6>
+                </div>
+                <div class="col-xs-4 col-sm-4">
+                    <h6><strong>Año:</strong> {{servicio.objetoPlanillaServicio.anio}} </h6>
+                </div>
+                <div class="col-xs-4 col-sm-4">
+                    <h6><strong>Año:</strong> {{servicio.objetoPlanillaServicio.anio}} </h6>
+                </div>
+                <div class="col-xs-4 col-sm-4">
+                    <h6><strong>Mes:</strong> {{servicio.objetoPlanillaServicio.mes}} </h6>
+                </div>
+                <div class="col-xs-4 col-sm-4">
+                    <h6><strong>Numero:</strong> {{servicio.objetoPlanillaServicio.numPlanilla}} </h6>
+                </div>
+                <div class="col-xs-4 col-sm-4">
+                    <h6><strong>Periodo:</strong> {{servicio.objetoPlanillaServicio.quincena}} </h6>
+                </div>
+                <div class="col-xs-4 col-sm-4">
+                    <h6><strong>Fecha Inicio:</strong> {{servicio.objetoPlanillaServicio.fechaInicial}} </h6>
+                </div>
+                <div class="col-xs-4 col-sm-4">
+                    <h6><strong>Fecha Fin:</strong> {{servicio.objetoPlanillaServicio.fechaFinal}} </h6>
                 </div>
             </div>
         </div>

@@ -4,6 +4,7 @@ import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 import { PlanillaService } from '../servicio/planilla.service';
 import { EditarPlanillaComponent } from './editar-planilla/editar-planilla.component';
 
+
 @Component({
     selector: 'app-planilla',
     templateUrl: './planilla.component.html',

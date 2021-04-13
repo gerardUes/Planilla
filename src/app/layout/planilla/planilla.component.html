@@ -11,6 +11,20 @@
             <i class="fa fa-plus form-control-feedback"></i> &nbsp;Editar
         </button>
 
+        <div class="btn-group ml-3" *ngIf="verResumenPlanilla" >
+            <button type="button" class="btn btn-outline-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" >
+                <i class="fa fa-list" aria-hidden="true"></i> &nbsp;  Otras Acciones
+            </button>
+            <div class="dropdown-menu dropdown-menu-right">
+              <button class="dropdown-item" type="button" data-toggle="modal" data-target="#resumenAsistencia" >Resumen Asistencia</button>
+              <button class="dropdown-item" type="button">Accion de Personal</button>
+              <button class="dropdown-item" type="button">Generar Planilla</button>
+              <button class="dropdown-item" type="button">Generar Archivo NB</button>
+            </div>
+          </div>
+
+
+
     </div>
 </div>
 
@@ -158,6 +172,12 @@
                         <ul class="list-group" style="color: black;">
                             <li class="list-group-item d-flex justify-content-between align-items-center"><strong>Deducciones:</strong><p>{{objetoTotales.deducciones | currency}}</p></li>
                             <li class="list-group-item d-flex justify-content-between align-items-center"><strong>Liquido:</strong><p>{{objetoTotales.liqRecibir | currency}}</p></li>
+                            <li class="list-group-item d-flex justify-content-between align-items-center"></li>
+                            <li class="list-group-item d-flex justify-content-between align-items-center"></li>
+                            <li class="list-group-item d-flex justify-content-between align-items-center"></li>
+                            <li class="list-group-item d-flex justify-content-between align-items-center"></li>
+                            <li class="list-group-item d-flex justify-content-between align-items-center"></li>
+                            <li class="list-group-item d-flex justify-content-between align-items-center"></li>
                         </ul>
                         <div class="mb-3">
                             <h5><strong>Total  {{totalEgresos | currency}}</strong></h5>
@@ -286,3 +306,191 @@
         <button (click)="c('Close click')" class="btn btn-secondary" type="button">Cerrar</button>
     </div>
 </ng-template>
+
+
+
+
+
+
+
+
+<!-- Modal de Resumen de Asistencia -->
+<div class="modal fade" id="resumenAsistencia" tabindex="-1" role="dialog" aria-labelledby="resumenAsistencia" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Resumen de Asistencia</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <div class="container">
+            <div class="table-responsive">
+                <table class="table table-hover ">
+                    <thead>
+                      <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Empleado</th>
+                        <th scope="col">Lab</th>
+                        <th scope="col">No. Lab.</th>
+                        <th scope="col">Capac.</th>
+                        <th scope="col">HAD.</th>
+                        <th scope="col">Simples</th>
+                        <th scope="col">Dobles</th>
+                        <th scope="col">Medicas Simples</th>
+                        <th scope="col">Medicas Dobles</th>
+                        <th scope="col">Dias. Vac.</th>
+                        <th scope="col">Estado</th>
+                        <th scope="col">Ver</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <th scope="row">1</th>
+                        <td>Mark</td>
+                        <td>Otto</td>
+                        <td>@mdo</td>
+                        <td>Mark</td>
+                        <td>Otto</td>
+                        <td>@mdo</td>
+                        <td>Mark</td>
+                        <td>Otto</td>
+                        <td>@mdo</td>
+                        <td>Mark</td>
+                        <td>Otto</td>
+                        <td>@mdo</td>
+                      </tr>
+                    </tbody>
+                  </table>
+              </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
+  <!-- Modal detalle Resumen de Asistencia -->
+<div class="modal fade" id="detalleResumenAsistencia" tabindex="-1" role="dialog" aria-labelledby="detalleResumenAsistencia" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Detalle Resumen de Asistencia</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <div class="container">
+            <div class="table-responsive">
+                <table class="table table-hover ">
+                    <thead>
+                      <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Empleado</th>
+                        <th scope="col">Lab</th>
+                        <th scope="col">No. Lab.</th>
+                        <th scope="col">Capac.</th>
+                        <th scope="col">HAD.</th>
+                        <th scope="col">Simples</th>
+                        <th scope="col">Dobles</th>
+                        <th scope="col">Medicas Simples</th>
+                        <th scope="col">Medicas Dobles</th>
+                        <th scope="col">Dias. Vac.</th>
+                        <th scope="col">Estado</th>
+                        <th scope="col">Ver</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <th scope="row">1</th>
+                        <td>Mark</td>
+                        <td>Otto</td>
+                        <td>@mdo</td>
+                        <td>Mark</td>
+                        <td>Otto</td>
+                        <td>@mdo</td>
+                        <td>Mark</td>
+                        <td>Otto</td>
+                        <td>@mdo</td>
+                        <td>Mark</td>
+                        <td>Otto</td>
+                        <td>@mdo</td>
+                      </tr>
+                    </tbody>
+                  </table>
+              </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
+   <!-- Modal Archivo Netbanking -->
+<div class="modal fade" id="archivoNB" tabindex="-1" role="dialog" aria-labelledby="archivoNB" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Archivo NetBanking</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <div class="container">
+            <div class="table-responsive">
+                <table class="table table-hover ">
+                    <thead>
+                      <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Empleado</th>
+                        <th scope="col">Lab</th>
+                        <th scope="col">No. Lab.</th>
+                        <th scope="col">Capac.</th>
+                        <th scope="col">HAD.</th>
+                        <th scope="col">Simples</th>
+                        <th scope="col">Dobles</th>
+                        <th scope="col">Medicas Simples</th>
+                        <th scope="col">Medicas Dobles</th>
+                        <th scope="col">Dias. Vac.</th>
+                        <th scope="col">Estado</th>
+                        <th scope="col">Ver</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <th scope="row">1</th>
+                        <td>Mark</td>
+                        <td>Otto</td>
+                        <td>@mdo</td>
+                        <td>Mark</td>
+                        <td>Otto</td>
+                        <td>@mdo</td>
+                        <td>Mark</td>
+                        <td>Otto</td>
+                        <td>@mdo</td>
+                        <td>Mark</td>
+                        <td>Otto</td>
+                        <td>@mdo</td>
+                      </tr>
+                    </tbody>
+                  </table>
+              </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+        </div>
+      </div>
+    </div>
+  </div>

@@ -10,8 +10,11 @@ import { EditarPlanillaComponent } from './editar-planilla/editar-planilla.compo
     styleUrls: ['./planilla.component.css']
 })
 export class PlanillaComponent implements OnInit {
-    anioConsulta:number;
-    mesConsulta:number;
+    totalIngresos:number;
+    totalEgresos:number;
+
+    anioConsulta: number;
+    mesConsulta: number;
     meses = [
         { valor: 1, mes: 'Enero' },
         { valor: 2, mes: 'Febrero' },
@@ -51,19 +54,19 @@ export class PlanillaComponent implements OnInit {
             this.listadoPlanilla = dat;
         });
 
-        this.anioConsulta=deadline.getFullYear();
-        this.mesConsulta=deadline.getMonth() + 1;
+        this.anioConsulta = deadline.getFullYear();
+        this.mesConsulta = deadline.getMonth() + 1;
     }
 
-    ngOnInit(): void {}
+    ngOnInit(): void { }
 
     verDetalle(data: any) {
-        /*console.log('data:'+JSON.stringify(data));
-  this.servicio.obtenerResumen(data.mes,data.anio,data.tiposPlanilla.tiposPlanillaPK.codTipopla,data.numPlanilla).subscribe(
-    resume=>{
-      this.listaResumen=resume;
-    }
-  );*/
+        console.log('data:' + JSON.stringify(data));
+        this.servicio.obtenerResumen(data.mes, data.anio, data.tiposPlanilla.tiposPlanillaPK.codTipopla, data.numPlanilla).subscribe(
+            resume => {
+                this.listaResumen = resume;
+            }
+        );
 
         this.verResumenPlanilla = true;
 
@@ -94,7 +97,7 @@ export class PlanillaComponent implements OnInit {
             .subscribe((totalesPlanilla) => {
                 this.asignarTotales(totalesPlanilla);
 
-                //console.log('TOTALES :'+JSON.stringify(totalesPlanilla));
+                console.log('TOTALES :'+JSON.stringify(totalesPlanilla));
             });
         //console.log('valor del objeto planilla service:'+JSON.stringify(this.servicio.objetoPlanillaServicio));
     }
@@ -131,6 +134,8 @@ export class PlanillaComponent implements OnInit {
 
     asignarTotales(data: any) {
         this.objetoTotales = data;
+        this.totalEgresos= this.objetoTotales.deducciones+this.objetoTotales.liqRecibir;
+        this.totalIngresos=this.objetoTotales.sueldoBase+this.objetoTotales.comisiones+this.objetoTotales.prestaciones+this.objetoTotales.vhHora;
     }
 
     irEditar() {
@@ -139,8 +144,8 @@ export class PlanillaComponent implements OnInit {
     }
 
 
-    filtroPantalla(){
-        this.listadoPlanilla=[];
+    filtroPantalla() {
+        this.listadoPlanilla = [];
         this.servicio.obtenerPlanillas(this.mesConsulta, this.anioConsulta).subscribe((dat) => {
             // console.log(JSON.stringify(dat));
             this.listadoPlanilla = dat;

@@ -3,25 +3,27 @@
         <button type="button" class="btn btn-outline-primary" (click)="irFormularioPlanilla()">
             <i class="fa fa-plus form-control-feedback"></i> &nbsp;Nuevo Registro
         </button>
-        <button *ngIf="verResumenPlanilla" type="button" class="btn btn-outline-primary ml-3"  (click)="resetPantalla()">
+        <button *ngIf="verResumenPlanilla" type="button" class="btn btn-outline-primary ml-3" (click)="resetPantalla()">
             <i class="fa fa-plus form-control-feedback"></i> &nbsp;Listado
         </button>
 
-        <button *ngIf="verResumenPlanilla" type="button" class="btn btn-outline-primary ml-3"  (click)="irEditar()">
+        <button *ngIf="verResumenPlanilla" type="button" class="btn btn-outline-primary ml-3" (click)="irEditar()">
             <i class="fa fa-plus form-control-feedback"></i> &nbsp;Editar
         </button>
 
-        <div class="btn-group ml-3" *ngIf="verResumenPlanilla" >
-            <button type="button" class="btn btn-outline-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" >
-                <i class="fa fa-list" aria-hidden="true"></i> &nbsp;  Otras Acciones
+        <div class="btn-group ml-3" *ngIf="verResumenPlanilla">
+            <button type="button" class="btn btn-outline-primary dropdown-toggle" data-toggle="dropdown"
+                aria-haspopup="true" aria-expanded="false">
+                <i class="fa fa-list" aria-hidden="true"></i> &nbsp; Otras Acciones
             </button>
             <div class="dropdown-menu dropdown-menu-right">
-              <button class="dropdown-item" type="button" data-toggle="modal" data-target="#resumenAsistencia" >Resumen Asistencia</button>
-              <button class="dropdown-item" type="button">Accion de Personal</button>
-              <button class="dropdown-item" type="button">Generar Planilla</button>
-              <button class="dropdown-item" type="button">Generar Archivo NB</button>
+                <button class="dropdown-item" type="button" data-toggle="modal" data-target="#resumenAsistencia">Resumen
+                    Asistencia</button>
+                <button class="dropdown-item" type="button">Accion de Personal</button>
+                <button class="dropdown-item" type="button">Generar Planilla</button>
+                <button class="dropdown-item" type="button">Generar Archivo NB</button>
             </div>
-          </div>
+        </div>
 
 
 
@@ -36,7 +38,7 @@
 
     <div class="col-xl-3 text-xs-center">
         <label><strong>Mes:</strong></label>
-        <select class="form-control" [(ngModel)]="mesConsulta" >
+        <select class="form-control" [(ngModel)]="mesConsulta">
             <option [value]="mes.valor" *ngFor="let mes of meses">{{mes.mes}}</option>
         </select>
 
@@ -44,7 +46,7 @@
 
     <div class="col-xl-6 text-xs-center">
         <button class="btn btn-outline-primary my-4" (click)="filtroPantalla()">
-        Buscar&nbsp;<i class="fa fa-search" aria-hidden="true"></i>
+            Buscar&nbsp;<i class="fa fa-search" aria-hidden="true"></i>
         </button>
     </div>
 
@@ -55,21 +57,21 @@
                     <table class="table">
                         <thead style="background-color: blue;color: white;">
                             <tr>
-                              <th>Planilla</th>
-                              <th># Planilla</th>
-                              <th>Año</th>
-                              <th>Mes</th>
-                              <th>Fecha Inicial</th>
-                              <th>Fecha Final</th>
-                              <th>Estado</th>
+                                <th>Planilla</th>
+                                <th># Planilla</th>
+                                <th>Año</th>
+                                <th>Mes</th>
+                                <th>Fecha Inicial</th>
+                                <th>Fecha Final</th>
+                                <th>Estado</th>
 
                             </tr>
-                          </thead>
-                          <!---(click)="open(content)"-->
-                          <tbody>
-                            <tr *ngFor="let planilla of listadoPlanilla" (click)="verDetalle(planilla)"   >
+                        </thead>
+                        <!---(click)="open(content)"-->
+                        <tbody>
+                            <tr *ngFor="let planilla of listadoPlanilla" (click)="verDetalle(planilla)">
                                 <td>
-                                {{planilla.tiposPlanilla.nomTipopla}}
+                                    {{planilla.tiposPlanilla.nomTipopla}}
                                 </td>
                                 <td>
                                     {{planilla.numPlanilla}}
@@ -96,9 +98,9 @@
 
 
                             </tr>
-                          </tbody>
+                        </tbody>
                     </table>
-                  </div>
+                </div>
             </div>
         </div>
     </div>
@@ -109,36 +111,37 @@
 
 
 
-<div class="row my-2 col-xl-12 text-xs-center" *ngIf="verResumenPlanilla && !flagEditar" style="border-radius: 10px;background-color:white">
+<div class="row my-2 col-xl-12 text-xs-center" *ngIf="verResumenPlanilla && !flagEditar"
+    style="border-radius: 10px;background-color:white">
     <div class="card mb-3" style="background-color: white;">
-        <div class="card-header" style="background-color: blue;color: white;" >
+        <div class="card-header" style="background-color: blue;color: white;">
             <h5>Planilla</h5>
         </div>
         <div class="card-body">
             <div class="row" style="border-radius: 20px;background-color:white;color: black;">
                 <div class="col-xs-4 col-sm-4">
-                    <h6><strong>Planilla:</strong> {{servicio.objetoPlanillaServicio.tiposPlanilla.nomTipopla}} </h6>
+                    <h6><strong>Planilla</strong> {{servicio.objetoPlanillaServicio.tiposPlanilla.nomTipopla}} </h6>
                 </div>
                 <div class="col-xs-4 col-sm-4">
-                    <h6><strong>Año:</strong> {{servicio.objetoPlanillaServicio.anio}} </h6>
+                    <h6><strong>Año</strong> {{servicio.objetoPlanillaServicio.anio}} </h6>
                 </div>
                 <div class="col-xs-4 col-sm-4">
-                    <h6><strong>Año:</strong> {{servicio.objetoPlanillaServicio.anio}} </h6>
+                    <h6><strong>Mes</strong> {{servicio.objetoPlanillaServicio.mes}} </h6>
                 </div>
                 <div class="col-xs-4 col-sm-4">
-                    <h6><strong>Mes:</strong> {{servicio.objetoPlanillaServicio.mes}} </h6>
+                    <h6><strong>Numero</strong> {{servicio.objetoPlanillaServicio.numPlanilla}} </h6>
                 </div>
                 <div class="col-xs-4 col-sm-4">
-                    <h6><strong>Numero:</strong> {{servicio.objetoPlanillaServicio.numPlanilla}} </h6>
+                    <h6><strong>Periodo</strong> {{servicio.objetoPlanillaServicio.quincena}} </h6>
                 </div>
                 <div class="col-xs-4 col-sm-4">
-                    <h6><strong>Periodo:</strong> {{servicio.objetoPlanillaServicio.quincena}} </h6>
+                    <h6><strong>Fecha Inicio</strong> {{servicio.objetoPlanillaServicio.fechaInicial}} </h6>
                 </div>
                 <div class="col-xs-4 col-sm-4">
-                    <h6><strong>Fecha Inicio:</strong> {{servicio.objetoPlanillaServicio.fechaInicial}} </h6>
+                    <h6><strong>Fecha Fin</strong> {{servicio.objetoPlanillaServicio.fechaFinal}} </h6>
                 </div>
-                <div class="col-xs-4 col-sm-4">
-                    <h6><strong>Fecha Fin:</strong> {{servicio.objetoPlanillaServicio.fechaFinal}} </h6>
+                <div class="col-xs-4 col-sm-4" *ngIf="objetoTotales">
+                    <h6><strong>Total Empleados</strong>{{objetoTotales.totalEmpleados}}</h6>
                 </div>
             </div>
         </div>
@@ -148,7 +151,7 @@
 <div class="row my-2 col-xl-12 text-xs-center" *ngIf="verResumenPlanilla && !flagEditar ">
     <div class="col-xl-6 text-xs-center">
         <div class="card mb-2">
-            <div class="card-header" style="background-color:blue;color: white;" >
+            <div class="card-header" style="background-color:blue;color: white;">
                 <h5>Resumen Planilla</h5>
             </div>
             <div class="card-body">
@@ -156,13 +159,25 @@
                     <div class="col-xs-6 col-sm-6" style="border:1px solid black;">
                         <h5><strong>Ingresos</strong></h5>
                         <ul class="list-group" style="color: black;">
-                            <li class="list-group-item d-flex justify-content-between align-items-center"><strong>Sueldo Bruto:</strong><p>{{objetoTotales.sueldoBase | currency }}</p></li>
-                            <li class="list-group-item d-flex justify-content-between align-items-center"><strong>Comisiones:</strong> <p>{{objetoTotales.comisiones | currency}}</p></li>
-                            <li class="list-group-item d-flex justify-content-between align-items-center "><strong>Prestaciones:</strong> <p>{{objetoTotales.prestaciones | currency}} </p></li>
-                            <li class="list-group-item d-flex justify-content-between align-items-center "><strong>Horas Extras:</strong> <p> {{objetoTotales.vhHora | currency}} </p> </li>
-                          </ul>
-                      <div class="my-2">
-                            <h5><strong>Total  {{totalIngresos | currency}}</strong></h5>
+                            <li class="list-group-item d-flex justify-content-between align-items-center"><strong>Sueldo
+                                    Bruto:</strong>
+                                <p>{{objetoTotales.sueldoBase | currency }}</p>
+                            </li>
+                            <li class="list-group-item d-flex justify-content-between align-items-center">
+                                <strong>Comisiones:</strong>
+                                <p>{{objetoTotales.comisiones | currency}}</p>
+                            </li>
+                            <li class="list-group-item d-flex justify-content-between align-items-center ">
+                                <strong>Prestaciones:</strong>
+                                <p>{{objetoTotales.prestaciones | currency}} </p>
+                            </li>
+                            <li class="list-group-item d-flex justify-content-between align-items-center "><strong>Horas
+                                    Extras:</strong>
+                                <p> {{objetoTotales.vhHora | currency}} </p>
+                            </li>
+                        </ul>
+                        <div class="my-2">
+                            <h5><strong>Total {{totalIngresos | currency}}</strong></h5>
                         </div>
 
                     </div>
@@ -170,8 +185,14 @@
                     <div class="col-xs-6 col-sm-6" style="border:1px solid black;">
                         <h5><strong>Egresos</strong></h5>
                         <ul class="list-group" style="color: black;">
-                            <li class="list-group-item d-flex justify-content-between align-items-center"><strong>Deducciones:</strong><p>{{objetoTotales.deducciones | currency}}</p></li>
-                            <li class="list-group-item d-flex justify-content-between align-items-center"><strong>Liquido:</strong><p>{{objetoTotales.liqRecibir | currency}}</p></li>
+                            <li class="list-group-item d-flex justify-content-between align-items-center">
+                                <strong>Deducciones:</strong>
+                                <p>{{objetoTotales.deducciones | currency}}</p>
+                            </li>
+                            <li class="list-group-item d-flex justify-content-between align-items-center">
+                                <strong>Liquido:</strong>
+                                <p>{{objetoTotales.liqRecibir | currency}}</p>
+                            </li>
                             <li class="list-group-item d-flex justify-content-between align-items-center"></li>
                             <li class="list-group-item d-flex justify-content-between align-items-center"></li>
                             <li class="list-group-item d-flex justify-content-between align-items-center"></li>
@@ -180,7 +201,7 @@
                             <li class="list-group-item d-flex justify-content-between align-items-center"></li>
                         </ul>
                         <div class="mb-3">
-                            <h5><strong>Total  {{totalEgresos | currency}}</strong></h5>
+                            <h5><strong>Total {{totalEgresos | currency}}</strong></h5>
                         </div>
                     </div>
                 </div>
@@ -188,40 +209,48 @@
         </div>
     </div>
 
-     <div class="col-xl-6">
+    <div class="col-xl-6">
 
         <div class="card">
-            <div class="card-header" style="background-color:blue;color: white;"  >
+            <div class="card-header" style="background-color:blue;color: white;">
                 <h5>Deducciones/Prestaciones</h5>
             </div>
             <div class="card-body">
+                <div class="row" style="background-color:blue;color: white;" >
+                    <div class="col-xs-6 col-sm-6" style="border:1px solid black;">
+                        <h5><strong>Prestaciones</strong></h5>
+                        <ul class="list-group" style="color: black;width:auto;height: 280px; overflow: auto">
+                            <li class="list-group-item d-flex justify-content-between align-items-center"
+                                *ngFor="let itemSuma of listaResumen" data-toggle="modal" data-target="#mDeduccion" (click)="obtenerDetalleDeducPresta(itemSuma.codDp)" (click)="llenarValor(itemSuma.descripcion)"><strong>{{itemSuma.descripcion}}:</strong>
+                                <p>{{itemSuma.monto | currency }}</p>
+                            </li>
+                        </ul>
+                        <div class="mb-3">
+                            <h5><strong>Total {{totalPrestaciones | currency}}</strong></h5>
+                        </div>
+                    </div>
 
-                <table class="table table-hover">
-                    <thead style="background-color: blue;color: white;">
-                      <tr>
-                        <th scope="col">Cantidad</th>
-                        <th scope="col">Cod dp</th>
-                        <th scope="col">Descripcion</th>
-                        <th scope="col">Monto</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <tr *ngFor="let item of listaResumen" >
-                        <th scope="row">{{item.cantidad}}</th>
-                        <td>{{item.codDp}}</td>
-                        <td>{{item.descripcion}}</td>
-                        <td>{{item.monto | currency }}</td>
-                      </tr>
-                    </tbody>
-                  </table>
+                    <div class="col-xs-6 col-sm-6" style="border:1px solid black;">
+                        <h5><strong>Deducciones</strong></h5>
+                        <ul class="list-group" style="color: black;width:auto;height: 280px; overflow: auto">
+                            <li class="list-group-item d-flex justify-content-between align-items-center"
+                                *ngFor="let itemResta of listaResumenDeduccion" data-toggle="modal" data-target="#mDeduccion" (click)="obtenerDetalleDeducPresta(itemResta.codDp)" (click)="llenarValor(itemResta.descripcion)"><strong>{{itemResta.descripcion}}:</strong>
+                                <p>{{itemResta.monto | currency }}</p>
+                            </li>
+                        </ul>
+                        <div class="mb-3">
+                            <h5><strong>Total {{totalDeducciones | currency}}</strong></h5>
+                        </div>
+                    </div>
 
-
+                </div>
             </div>
-          </div>
+
+        </div>
 
 
 
-     </div>
+    </div>
 
 </div>
 
@@ -232,30 +261,57 @@
                 <h5>Horas extras</h5>
             </div>
             <div class="card-body">
-                <div class="table-responsive">
-                    <table class="table table-hover">
+                <div class="table-responsive" style="height:500px;overflow:scroll;">
+                    <table class="table table-hover" >
                         <thead>
-                          <tr>
-                            <th scope="col">cod emp</th>
-                            <th scope="col">Nombre</th>
-                            <th scope="col">Simples</th>
-                            <th scope="col">Dobles</th>
-                            <th scope="col">Medica simple</th>
-                            <th scope="col">Medica doble</th>
-                          </tr>
+                            <tr>
+                                <th scope="col">cod emp</th>
+                                <th scope="col">Nombre</th>
+                                <th scope="col">Simples</th>
+                                <th scope="col">Dobles</th>
+                                <th scope="col">Medica simple</th>
+                                <th scope="col">Medica doble</th>
+                            </tr>
                         </thead>
                         <tbody>
-                          <tr *ngFor="let item of listaHorasExtras">
-                            <th scope="row">{{item.empleados.empleadosPK.codEmp}}</th>
-                            <td>{{item.empleados.nombres}} {{item.empleados.apellidos}}</td>
-                            <td style="text-align: right;">{{item.vhXsencilla | currency }}</td>
-                            <td style="text-align: right;" >{{item.vhXdoble | currency }}</td>
-                            <td style="text-align: right;" >{{item.vhX150 | currency}}</td>
-                            <td style="text-align: right;" >{{item.vhX250 | currency }}</td>
-                          </tr>
+                            <tr *ngFor="let item of listaHorasExtras">
+                                <th scope="row">{{item.empleados.empleadosPK.codEmp}}</th>
+                                <td>{{item.empleados.nombres}} {{item.empleados.apellidos}}</td>
+                                <td style="text-align: right;">{{item.vhXsencilla | currency }}</td>
+                                <td style="text-align: right;">{{item.vhXdoble | currency }}</td>
+                                <td style="text-align: right;">{{item.vhX150 | currency}}</td>
+                                <td style="text-align: right;">{{item.vhX250 | currency }}</td>
+                            </tr>
 
                         </tbody>
-                      </table>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-xl-6 text-xs-center">
+        <div class="card mb-3">
+            <div class="card-header" style="background-color:blue;color: white;">
+                <h5>Acciones de Personal</h5>
+            </div>
+            <div class="card-body">
+                <div class="table-responsive" style="height:500px;overflow:scroll;">
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th scope="col">Accion</th>
+                                <th scope="col" style="text-align: right;" >Totales</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let itemAccion of listaAccionesEnc">
+                                <td >{{itemAccion.nomTipoAccion}}</td>
+                                <td style="text-align: right;">{{itemAccion.total}}</td>
+                            </tr>
+
+                        </tbody>
+                    </table>
                 </div>
             </div>
         </div>
@@ -282,23 +338,23 @@
         <div class="table-responsive">
             <table class="table table-hover">
                 <thead style="background-color: blue;color: white;">
-                  <tr>
-                    <th scope="col">Cantidad</th>
-                    <th scope="col">Cod dp</th>
-                    <th scope="col">Descripcion</th>
-                    <th scope="col">Monto</th>
-                  </tr>
+                    <tr>
+                        <th scope="col">Cantidad</th>
+                        <th scope="col">Cod dp</th>
+                        <th scope="col">Descripcion</th>
+                        <th scope="col">Monto</th>
+                    </tr>
                 </thead>
                 <tbody>
-                  <tr *ngFor="let item of listaResumen" >
-                    <th scope="row">{{item.cantidad}}</th>
-                    <td>{{item.codDp}}</td>
-                    <td>{{item.descripcion}}</td>
-                    <td>{{item.monto | currency }}</td>
-                  </tr>
+                    <tr *ngFor="let item of listaResumen">
+                        <th scope="row">{{item.cantidad}}</th>
+                        <td>{{item.codDp}}</td>
+                        <td>{{item.descripcion}}</td>
+                        <td>{{item.monto | currency }}</td>
+                    </tr>
                 </tbody>
-              </table>
-          </div>
+            </table>
+        </div>
 
 
     </div>
@@ -315,124 +371,126 @@
 
 
 <!-- Modal de Resumen de Asistencia -->
-<div class="modal fade" id="resumenAsistencia" tabindex="-1" role="dialog" aria-labelledby="resumenAsistencia" aria-hidden="true">
+<div class="modal fade" id="resumenAsistencia" tabindex="-1" role="dialog" aria-labelledby="resumenAsistencia"
+    aria-hidden="true">
     <div class="modal-dialog modal-lg" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">Resumen de Asistencia</h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Resumen de Asistencia</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="container">
+                    <div class="table-responsive">
+                        <table class="table table-hover ">
+                            <thead>
+                                <tr>
+                                    <th scope="col">#</th>
+                                    <th scope="col">Empleado</th>
+                                    <th scope="col">Lab</th>
+                                    <th scope="col">No. Lab.</th>
+                                    <th scope="col">Capac.</th>
+                                    <th scope="col">HAD.</th>
+                                    <th scope="col">Simples</th>
+                                    <th scope="col">Dobles</th>
+                                    <th scope="col">Medicas Simples</th>
+                                    <th scope="col">Medicas Dobles</th>
+                                    <th scope="col">Dias. Vac.</th>
+                                    <th scope="col">Estado</th>
+                                    <th scope="col">Ver</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <th scope="row">1</th>
+                                    <td>Mark</td>
+                                    <td>Otto</td>
+                                    <td>@mdo</td>
+                                    <td>Mark</td>
+                                    <td>Otto</td>
+                                    <td>@mdo</td>
+                                    <td>Mark</td>
+                                    <td>Otto</td>
+                                    <td>@mdo</td>
+                                    <td>Mark</td>
+                                    <td>Otto</td>
+                                    <td>@mdo</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+            </div>
         </div>
-        <div class="modal-body">
-          <div class="container">
-            <div class="table-responsive">
-                <table class="table table-hover ">
-                    <thead>
-                      <tr>
-                        <th scope="col">#</th>
-                        <th scope="col">Empleado</th>
-                        <th scope="col">Lab</th>
-                        <th scope="col">No. Lab.</th>
-                        <th scope="col">Capac.</th>
-                        <th scope="col">HAD.</th>
-                        <th scope="col">Simples</th>
-                        <th scope="col">Dobles</th>
-                        <th scope="col">Medicas Simples</th>
-                        <th scope="col">Medicas Dobles</th>
-                        <th scope="col">Dias. Vac.</th>
-                        <th scope="col">Estado</th>
-                        <th scope="col">Ver</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <tr>
-                        <th scope="row">1</th>
-                        <td>Mark</td>
-                        <td>Otto</td>
-                        <td>@mdo</td>
-                        <td>Mark</td>
-                        <td>Otto</td>
-                        <td>@mdo</td>
-                        <td>Mark</td>
-                        <td>Otto</td>
-                        <td>@mdo</td>
-                        <td>Mark</td>
-                        <td>Otto</td>
-                        <td>@mdo</td>
-                      </tr>
-                    </tbody>
-                  </table>
-              </div>
-          </div>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-        </div>
-      </div>
     </div>
-  </div>
+</div>
 
 
 
-  <!-- Modal detalle Resumen de Asistencia -->
-<div class="modal fade" id="detalleResumenAsistencia" tabindex="-1" role="dialog" aria-labelledby="detalleResumenAsistencia" aria-hidden="true">
+<!-- Modal detalle Resumen de Asistencia -->
+<div class="modal fade" id="detalleResumenAsistencia" tabindex="-1" role="dialog"
+    aria-labelledby="detalleResumenAsistencia" aria-hidden="true">
     <div class="modal-dialog modal-lg" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">Detalle Resumen de Asistencia</h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Detalle Resumen de Asistencia</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="container">
+                    <div class="table-responsive">
+                        <table class="table table-hover ">
+                            <thead>
+                                <tr>
+                                    <th scope="col">#</th>
+                                    <th scope="col">Empleado</th>
+                                    <th scope="col">Lab</th>
+                                    <th scope="col">No. Lab.</th>
+                                    <th scope="col">Capac.</th>
+                                    <th scope="col">HAD.</th>
+                                    <th scope="col">Simples</th>
+                                    <th scope="col">Dobles</th>
+                                    <th scope="col">Medicas Simples</th>
+                                    <th scope="col">Medicas Dobles</th>
+                                    <th scope="col">Dias. Vac.</th>
+                                    <th scope="col">Estado</th>
+                                    <th scope="col">Ver</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <th scope="row">1</th>
+                                    <td>Mark</td>
+                                    <td>Otto</td>
+                                    <td>@mdo</td>
+                                    <td>Mark</td>
+                                    <td>Otto</td>
+                                    <td>@mdo</td>
+                                    <td>Mark</td>
+                                    <td>Otto</td>
+                                    <td>@mdo</td>
+                                    <td>Mark</td>
+                                    <td>Otto</td>
+                                    <td>@mdo</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+            </div>
         </div>
-        <div class="modal-body">
-          <div class="container">
-            <div class="table-responsive">
-                <table class="table table-hover ">
-                    <thead>
-                      <tr>
-                        <th scope="col">#</th>
-                        <th scope="col">Empleado</th>
-                        <th scope="col">Lab</th>
-                        <th scope="col">No. Lab.</th>
-                        <th scope="col">Capac.</th>
-                        <th scope="col">HAD.</th>
-                        <th scope="col">Simples</th>
-                        <th scope="col">Dobles</th>
-                        <th scope="col">Medicas Simples</th>
-                        <th scope="col">Medicas Dobles</th>
-                        <th scope="col">Dias. Vac.</th>
-                        <th scope="col">Estado</th>
-                        <th scope="col">Ver</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <tr>
-                        <th scope="row">1</th>
-                        <td>Mark</td>
-                        <td>Otto</td>
-                        <td>@mdo</td>
-                        <td>Mark</td>
-                        <td>Otto</td>
-                        <td>@mdo</td>
-                        <td>Mark</td>
-                        <td>Otto</td>
-                        <td>@mdo</td>
-                        <td>Mark</td>
-                        <td>Otto</td>
-                        <td>@mdo</td>
-                      </tr>
-                    </tbody>
-                  </table>
-              </div>
-          </div>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-        </div>
-      </div>
     </div>
-  </div>
+</div>
 
 
 
@@ -440,62 +498,104 @@
 
 
 
-  
-   <!-- Modal Archivo Netbanking -->
+
+<!-- Modal Archivo Netbanking -->
 <div class="modal fade" id="archivoNB" tabindex="-1" role="dialog" aria-labelledby="archivoNB" aria-hidden="true">
     <div class="modal-dialog modal-lg" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">Archivo NetBanking</h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Archivo NetBanking</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="container">
+                    <div class="table-responsive">
+                        <table class="table table-hover ">
+                            <thead>
+                                <tr>
+                                    <th scope="col">#</th>
+                                    <th scope="col">Empleado</th>
+                                    <th scope="col">Lab</th>
+                                    <th scope="col">No. Lab.</th>
+                                    <th scope="col">Capac.</th>
+                                    <th scope="col">HAD.</th>
+                                    <th scope="col">Simples</th>
+                                    <th scope="col">Dobles</th>
+                                    <th scope="col">Medicas Simples</th>
+                                    <th scope="col">Medicas Dobles</th>
+                                    <th scope="col">Dias. Vac.</th>
+                                    <th scope="col">Estado</th>
+                                    <th scope="col">Ver</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <th scope="row">1</th>
+                                    <td>Mark</td>
+                                    <td>Otto</td>
+                                    <td>@mdo</td>
+                                    <td>Mark</td>
+                                    <td>Otto</td>
+                                    <td>@mdo</td>
+                                    <td>Mark</td>
+                                    <td>Otto</td>
+                                    <td>@mdo</td>
+                                    <td>Mark</td>
+                                    <td>Otto</td>
+                                    <td>@mdo</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+            </div>
         </div>
-        <div class="modal-body">
-          <div class="container">
+    </div>
+</div>
+
+
+
+
+<!--MODAL DETALLE PRESTACIONES/DEDUCCIONES-->
+
+<div class="modal fade bd-example-modal-lg" id="mDeduccion" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+
+        <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Detalle Deduccion/Prestacion:<strong>{{tipo}}</strong></h5><br>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+
+          <div class="modal-body">
             <div class="table-responsive">
-                <table class="table table-hover ">
+                <table class="table table-hover">
                     <thead>
                       <tr>
-                        <th scope="col">#</th>
+                        <th scope="col">Codigo</th>
                         <th scope="col">Empleado</th>
-                        <th scope="col">Lab</th>
-                        <th scope="col">No. Lab.</th>
-                        <th scope="col">Capac.</th>
-                        <th scope="col">HAD.</th>
-                        <th scope="col">Simples</th>
-                        <th scope="col">Dobles</th>
-                        <th scope="col">Medicas Simples</th>
-                        <th scope="col">Medicas Dobles</th>
-                        <th scope="col">Dias. Vac.</th>
-                        <th scope="col">Estado</th>
-                        <th scope="col">Ver</th>
+                        <th scope="col">Valor</th>
                       </tr>
                     </thead>
                     <tbody>
-                      <tr>
-                        <th scope="row">1</th>
-                        <td>Mark</td>
-                        <td>Otto</td>
-                        <td>@mdo</td>
-                        <td>Mark</td>
-                        <td>Otto</td>
-                        <td>@mdo</td>
-                        <td>Mark</td>
-                        <td>Otto</td>
-                        <td>@mdo</td>
-                        <td>Mark</td>
-                        <td>Otto</td>
-                        <td>@mdo</td>
+                      <tr *ngFor="let item of listaDetalleResumen">
+                        <th scope="row">{{item.codEmp}}</th>
+                        <td>{{item.nombre}}</td>
+                        <td>{{item.valor | currency}}</td>
                       </tr>
                     </tbody>
                   </table>
-              </div>
+            </div>
           </div>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-        </div>
+
+
       </div>
     </div>
   </div>

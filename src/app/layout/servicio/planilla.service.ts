@@ -24,6 +24,13 @@ export class PlanillaService {
     return this.http.get('http://138.128.245.244:8445/infosweb/api/v1/rrhh/planilla/total-planilla-by-programacion/'+cia+'/'+anio+'/'+secuencia+'/'+tipo);
   }
 
+
+  obtenerDetalleDeducPresta(cia:any,anio:any,secuencia:any,tipo:any,codDp:any):Observable<any>{
+    return this.http.get(this.baseUrl+'find-detalle-resumen-by-programacion-pla/'+cia+'/'+anio+'/'+secuencia+'/'+tipo+'/'+codDp);
+  }
+
+
+
   obtenerHorasXtras(cia:any,anio:any,secuencia:any,tipo:any):Observable<any>{
     return this.http.get('http://138.128.245.244:8445/infosweb/api/v1/rrhh/planilla/horas-extras-by-programacion/'+cia+'/'+anio+'/'+secuencia+'/'+tipo);
   }
@@ -52,10 +59,14 @@ obtenerPlanillas(mes:any,anio:any):Observable<any>{
 
 
 
-  obtenerResumen(mes:any,anio:any,tipo:any,num:any):Observable<any>{
-    return this.http.get(this.baseUrl+'find-resumen-by-programacion-pla/'+'3/'+anio+'/'+mes+'/'+tipo+'/'+num);
+  obtenerResumen(mes:any,anio:any,tipo:any,num:any,tipoDeduccion:any):Observable<any>{
+    return this.http.get(this.baseUrl+'find-resumen-by-programacion-pla-suma-resta/'+'3/'+anio+'/'+mes+'/'+tipo+'/'+num+'/'+tipoDeduccion);
   }
 
+
+  obtenerAccionEnc(cia:any,anio:any,mes:any,tipo:any,num:any):Observable<any>{
+    return this.http.get(this.baseUrl+'find-acciones-enc-by-programacion-pla/'+cia+'/'+anio+'/'+mes+'/'+tipo+'/'+num+'/');
+  }
 
 
 

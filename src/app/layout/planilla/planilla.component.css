@@ -3,11 +3,11 @@ table tr:hover {
     color: white;
     font-weight: bolder;
   }
-  
+
   table tr td small {
     opacity: 0.2;
   }
-  
+
   table tr:hover td small {
     opacity: 1;
   }
@@ -18,12 +18,12 @@ table tr:hover {
     background-color: currentColor !important;
   }
   tbody {
-    background: lightgrey;
+    background: white;
   }
 
 
 
-  ::ng-deep .md-class .modal-dialog { 
+  ::ng-deep .md-class .modal-dialog {
     max-width: 80%;
     width: 80%;
 }

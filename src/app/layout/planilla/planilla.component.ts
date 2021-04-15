@@ -11,8 +11,12 @@ import { EditarPlanillaComponent } from './editar-planilla/editar-planilla.compo
     styleUrls: ['./planilla.component.css']
 })
 export class PlanillaComponent implements OnInit {
+
+    tipo:string;
     totalIngresos:number;
     totalEgresos:number;
+    totalDeducciones:number;
+    totalPrestaciones:number;
 
     anioConsulta: number;
     mesConsulta: number;
@@ -33,6 +37,9 @@ export class PlanillaComponent implements OnInit {
 
     listadoPlanilla: Array<any>;
     listaResumen: Array<any>;
+    listaResumenDeduccion:Array<any>;
+    listaDetalleResumen:Array<any>;
+    listaAccionesEnc:Array<any>;
     closeResult: string;
     verResumenPlanilla: boolean = false;
     listaHorasExtras: Array<any>;
@@ -63,9 +70,17 @@ export class PlanillaComponent implements OnInit {
 
     verDetalle(data: any) {
         console.log('data:' + JSON.stringify(data));
-        this.servicio.obtenerResumen(data.mes, data.anio, data.tiposPlanilla.tiposPlanillaPK.codTipopla, data.numPlanilla).subscribe(
+        this.servicio.obtenerResumen(data.mes, data.anio, data.tiposPlanilla.tiposPlanillaPK.codTipopla, data.numPlanilla,'S').subscribe(
             resume => {
                 this.listaResumen = resume;
+                this.totalizarPrestaciones(this.listaResumen);
+            }
+        );
+
+        this.servicio.obtenerResumen(data.mes, data.anio, data.tiposPlanilla.tiposPlanillaPK.codTipopla, data.numPlanilla,'R').subscribe(
+            resume => {
+                this.listaResumenDeduccion = resume;
+                this.totalizarDeduccion(this.listaResumenDeduccion);
             }
         );
 
@@ -73,6 +88,8 @@ export class PlanillaComponent implements OnInit {
 
         this.servicio.objetoPlanillaServicio = data;
         this.programacionPla = data;
+
+
 
         this.hijo.hola(data);
 
@@ -100,8 +117,18 @@ export class PlanillaComponent implements OnInit {
 
                 console.log('TOTALES :'+JSON.stringify(totalesPlanilla));
             });
-        //console.log('valor del objeto planilla service:'+JSON.stringify(this.servicio.objetoPlanillaServicio));
-    }
+
+
+            this.servicio.obtenerAccionEnc(this.servicio.objetoPlanillaServicio.programacionPlaPK.codCia,
+                this.servicio.objetoPlanillaServicio.programacionPlaPK.periodo,this.servicio.objetoPlanillaServicio.mes,
+                this.servicio.objetoPlanillaServicio.tiposPlanilla.tiposPlanillaPK.codTipopla,this.servicio.objetoPlanillaServicio.numPlanilla)
+                .subscribe(
+                    accion=>{
+                        this.listaAccionesEnc=accion;
+                    }
+                );
+
+}
 
     open(content) {
         this.modalService.open(content, { size: 'lg', windowClass: 'modal-xl' }).result.then(
@@ -152,4 +179,42 @@ export class PlanillaComponent implements OnInit {
             this.listadoPlanilla = dat;
         });
     }
+
+    totalizarPrestaciones(lista:Array<any>){
+        this.totalPrestaciones =0.0;
+        lista.forEach(elemento=>{
+            this.totalPrestaciones =this.totalPrestaciones+Number(elemento.monto);
+        });
+
+    }
+
+    totalizarDeduccion(lista:Array<any>){
+        this.totalDeducciones =0.0;
+        lista.forEach(elemento=>{
+            this.totalDeducciones =this.totalDeducciones+Number(elemento.monto);
+        });
+
+    }
+
+
+
+obtenerDetalleDeducPresta(data:any){
+    this.servicio.obtenerDetalleDeducPresta(this.servicio.objetoPlanillaServicio.programacionPlaPK.codCia,
+        this.servicio.objetoPlanillaServicio.programacionPlaPK.periodo,
+        this.servicio.objetoPlanillaServicio.programacionPlaPK.secuencia,this.servicio.objetoPlanillaServicio.tiposPlanilla.tiposPlanillaPK.codTipopla,data).
+        subscribe(
+            detalle=>{
+                this.listaDetalleResumen=detalle;
+            }
+        );
+
+}
+
+
+llenarValor(valor:string){
+    this.tipo=valor;
+}
+
+
+
 }

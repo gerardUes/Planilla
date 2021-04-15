@@ -1,9 +1,13 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
+import { Console } from 'console';
+import { ProgramacionPla } from '../formPlanilla/form-planilla/modeloPlanilla/ProgramacionPla';
+import { ProgramacionPlaPK } from '../formPlanilla/form-planilla/modeloPlanilla/ProgramacionPlaPK';
+import { TiposPlanilla } from '../formPlanilla/form-planilla/modeloPlanilla/TiposPlanilla';
 import { PlanillaService } from '../servicio/planilla.service';
 import { EditarPlanillaComponent } from './editar-planilla/editar-planilla.component';
-
+import Swal from 'sweetalert2';
 
 @Component({
     selector: 'app-planilla',
@@ -11,7 +15,8 @@ import { EditarPlanillaComponent } from './editar-planilla/editar-planilla.compo
     styleUrls: ['./planilla.component.css']
 })
 export class PlanillaComponent implements OnInit {
-
+    
+    tipoAccion:string;
     tipo:string;
     totalIngresos:number;
     totalEgresos:number;
@@ -40,6 +45,7 @@ export class PlanillaComponent implements OnInit {
     listaResumenDeduccion:Array<any>;
     listaDetalleResumen:Array<any>;
     listaAccionesEnc:Array<any>;
+    listaDetalleAccion:Array<any>;
     closeResult: string;
     verResumenPlanilla: boolean = false;
     listaHorasExtras: Array<any>;
@@ -215,6 +221,105 @@ llenarValor(valor:string){
     this.tipo=valor;
 }
 
+llenadoTipoAccion(valor:any){
+this.tipoAccion=valor;
+}
+
+
+
+obtenerDetalleAccionPersonal(data:any){
+
+this.servicio.obtenerAccionDetalle(this.servicio.objetoPlanillaServicio.programacionPlaPK.codCia,
+    this.servicio.objetoPlanillaServicio.programacionPlaPK.periodo,this.servicio.objetoPlanillaServicio.mes,
+    this.servicio.objetoPlanillaServicio.tiposPlanilla.tiposPlanillaPK.codTipopla,
+    this.servicio.objetoPlanillaServicio.numPlanilla,data.codTipoAccion).subscribe(
+        detalleAccion=>{
+            this.listaDetalleAccion=detalleAccion;
+            console.log('valor del detalle'+JSON.stringify(detalleAccion));
+        }
+    );
+}
+
+
+
+cerrarPlanilla(){
+    let programacionLLave=new ProgramacionPlaPK();
+    let programacionPadre=new ProgramacionPla();
+
+    programacionLLave=this.servicio.objetoPlanillaServicio.programacionPlaPK;
+
+    programacionPadre.programacionPlaPK=new ProgramacionPlaPK();
+    programacionPadre.programacionPlaPK=programacionLLave;
+
+    console.log('lo que mando:'+JSON.stringify(programacionPadre));
+    
+    this.servicio.cerrarPlanillaSevice(programacionPadre).subscribe(
+        respuesta=>{
+           if(respuesta){
+            Swal.fire({
+                title: 'Registro de planilla',
+                text: 'Planilla Cerrada con exito',
+                icon: 'success',
+                allowOutsideClick: false,
+                showCancelButton: false,
+                confirmButtonColor: '#3085d6',
+                confirmButtonText: 'Cerrar'
+              }).then(()=> {
+              
+                this.redireccionar(); 
+              
+              })
+           }
+        }
+    );
+        
+}
+
+
+generarPlanilla(){
+
+    let programacionLLave=new ProgramacionPlaPK();
+    let programacionPadre=new ProgramacionPla();
+
+    programacionLLave=this.servicio.objetoPlanillaServicio.programacionPlaPK;
+
+    programacionPadre.programacionPlaPK=new ProgramacionPlaPK();
+    programacionPadre.programacionPlaPK=programacionLLave;
+
+    
+    this.servicio.generarPlanillaSevice(programacionPadre).subscribe(
+        respuesta=>{
+            console.log('Respuesta Generacion:'+JSON.stringify(respuesta));
+           if(respuesta){
+            Swal.fire({
+                title: 'Registro de planilla',
+                text: 'Planilla Generada con exito',
+                icon: 'success',
+                allowOutsideClick: false,
+                showCancelButton: false,
+                confirmButtonColor: '#3085d6',
+                confirmButtonText: 'Cerrar'
+              }).then(()=> {
+              
+                this.redireccionar(); 
+              
+              })
+           }
+        }
+    );
+
+
+
+}
+
+
+
+redireccionar(){
+    
+    this.verResumenPlanilla=false;
+    this.filtroPantalla();
+    this.router.navigate(['./planilla']);
+}
 
 
 }

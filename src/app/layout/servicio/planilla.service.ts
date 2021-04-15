@@ -1,8 +1,10 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, throwError } from 'rxjs';
 import { ProgramacionPla } from '../formPlanilla/form-planilla/modeloPlanilla/ProgramacionPla';
 import { ProgramacionPlaPK } from '../formPlanilla/form-planilla/modeloPlanilla/ProgramacionPlaPK';
+import { retry, catchError } from 'rxjs/operators';
+
 
 @Injectable({
   providedIn: 'root'
@@ -17,6 +19,31 @@ export class PlanillaService {
 
   constructor(private http:HttpClient) {
 
+  }
+
+
+  handleError(error: HttpErrorResponse) {
+    let errorMessage = 'Unknown error!';
+    if (error.error instanceof ErrorEvent) {
+      // Client-side errors
+      errorMessage = `Error: ${error.error.message}`;
+    } else {
+      // Server-side errors
+      errorMessage = `Error Code: ${error.status}\nMessage: ${error.message}`;
+    }
+    window.alert(errorMessage);
+    return throwError(errorMessage);
+  }
+
+
+  generarPlanillaSevice(objeto:any):Observable<any>{
+    return this.http.post(this.baseUrl+'generar-planilla', objeto).pipe(catchError(this.handleError));
+  }
+
+
+
+  cerrarPlanillaSevice(objeto:any):Observable<any>{
+    return this.http.post(this.baseUrl+'cerrar-planilla', objeto).pipe(catchError(this.handleError));
   }
 
 
@@ -69,6 +96,11 @@ obtenerPlanillas(mes:any,anio:any):Observable<any>{
   }
 
 
+
+
+  obtenerAccionDetalle(cia:any,anio:any,mes:any,tipo:any,num:any,tipoAccion:any):Observable<any>{
+    return this.http.get(this.baseUrl+'find-acciones-det-by-programacion-pla/'+cia+'/'+anio+'/'+mes+'/'+tipo+'/'+num+'/'+tipoAccion);
+  }
 
   public get objetoPlanillaServicio() {
     return this.objetoPlanillaService;

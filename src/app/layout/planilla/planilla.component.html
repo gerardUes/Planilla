@@ -4,11 +4,23 @@
             <i class="fa fa-plus form-control-feedback"></i> &nbsp;Nuevo Registro
         </button>
         <button *ngIf="verResumenPlanilla" type="button" class="btn btn-outline-primary ml-3" (click)="resetPantalla()">
-            <i class="fa fa-plus form-control-feedback"></i> &nbsp;Listado
+            <i class="fa fa-list-alt form-control-feedback"></i> &nbsp;Listado
         </button>
 
         <button *ngIf="verResumenPlanilla" type="button" class="btn btn-outline-primary ml-3" (click)="irEditar()">
-            <i class="fa fa-plus form-control-feedback"></i> &nbsp;Editar
+            <i class="fa fa-pencil form-control-feedback"></i> &nbsp;Editar
+        </button>
+
+        <button *ngIf="verResumenPlanilla" type="button" class="btn btn-outline-primary ml-3" (click)="cerrarPlanilla()"
+        [disabled]="servicio.objetoPlanillaServicio.status=='C'"
+        >
+            <i class="fa fa-hourglass-end form-control-feedback"></i> &nbsp;Cerrar Planilla
+        </button>
+
+        <button *ngIf="verResumenPlanilla" type="button" class="btn btn-outline-primary ml-3" (click)="generarPlanilla()"
+        [disabled]="servicio.objetoPlanillaServicio.status=='C'"
+        >
+            <i class="fa fa-check-circle form-control-feedback"></i> &nbsp;Generar Planilla
         </button>
 
         <div class="btn-group ml-3" *ngIf="verResumenPlanilla">
@@ -20,7 +32,6 @@
                 <button class="dropdown-item" type="button" data-toggle="modal" data-target="#resumenAsistencia">Resumen
                     Asistencia</button>
                 <button class="dropdown-item" type="button">Accion de Personal</button>
-                <button class="dropdown-item" type="button">Generar Planilla</button>
                 <button class="dropdown-item" type="button">Generar Archivo NB</button>
             </div>
         </div>
@@ -148,7 +159,7 @@
     </div>
 </div>
 
-<div class="row my-2 col-xl-12 text-xs-center" *ngIf="verResumenPlanilla && !flagEditar ">
+<div class="row my-2" *ngIf="verResumenPlanilla && !flagEditar ">
     <div class="col-xl-6 text-xs-center">
         <div class="card mb-2">
             <div class="card-header" style="background-color:blue;color: white;">
@@ -305,8 +316,8 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr *ngFor="let itemAccion of listaAccionesEnc">
-                                <td >{{itemAccion.nomTipoAccion}}</td>
+                            <tr *ngFor="let itemAccion of listaAccionesEnc" (click)="obtenerDetalleAccionPersonal(itemAccion)" (click)="llenadoTipoAccion(itemAccion.nomTipoAccion)"  data-toggle="modal" data-target="#mDetalleAccion">
+                                <td ><strong>{{itemAccion.nomTipoAccion}}</strong></td>
                                 <td style="text-align: right;">{{itemAccion.total}}</td>
                             </tr>
 
@@ -589,6 +600,51 @@
                         <th scope="row">{{item.codEmp}}</th>
                         <td>{{item.nombre}}</td>
                         <td>{{item.valor | currency}}</td>
+                      </tr>
+                    </tbody>
+                  </table>
+            </div>
+          </div>
+
+
+      </div>
+    </div>
+  </div>
+
+
+
+  <!--MODAL DETALLE ACCION DE PERSONAL-->
+
+<div class="modal fade bd-example-modal-lg" id="mDetalleAccion" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+
+        <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Detalle Accion Personal:<strong>{{tipoAccion}}</strong></h5><br>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+
+          <div class="modal-body">
+            <div class="table-responsive">
+                <table class="table table-hover">
+                    <thead>
+                      <tr>
+                        <th scope="col">Codigo</th>
+                        <th scope="col">Empleado</th>
+                        <th scope="col">Sueldo Anterior</th>
+                        <th scope="col">Sueldo Actual</th>
+                        <th scope="col">Fecha Inicial</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr *ngFor="let item of listaDetalleAccion">
+                        <th scope="row">{{item.codigoEmpleado}}</th>
+                        <td>{{item.empleado}}</td>
+                        <td>{{item.sueldoAnterior | currency}}</td>
+                        <td>{{item.sueldoNuevo | currency}}</td>
+                        <td>{{item.fechaInicial | date:'dd/MM/yyyy'}}</td>
                       </tr>
                     </tbody>
                   </table>

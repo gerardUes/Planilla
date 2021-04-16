@@ -69,7 +69,7 @@ export class FormPlanillaComponent implements OnInit {
             comentario:[''],
             anioPrestamo:[''],
             mesPrestamo:[''],
-            factorCambiario:[''],
+            factorCambiario:[1],
             nota:[''],
 
           });
@@ -103,6 +103,17 @@ export class FormPlanillaComponent implements OnInit {
         objetoPlanilla.tiposPlanilla.tiposPlanillaPK=new TiposPlanillaPK();
         objetoPlanilla.tiposPlanilla.tiposPlanillaPK.codCia=3;
         objetoPlanilla.tiposPlanilla.tiposPlanillaPK.codTipopla=Number(this.planillaForm.get('codTipopla').value);
+        objetoPlanilla.diasProyectar=Number(this.planillaForm.get('proyectar').value);
+        if(this.fechaInicialHX){
+        const fechaInicialHXConstDate=this.fechaInicialHX;
+        objetoPlanilla.fechaInicioHx=fechaInicialHXConstDate.day+'/'+fechaInicialHXConstDate.month+'/'+fechaInicialHXConstDate.year;
+
+        }
+
+
+        objetoPlanilla.factorCambiario=this.planillaForm.get('factorCambiario').value;
+        objetoPlanilla.comentario=this.planillaForm.get('comentario').value;
+        objetoPlanilla.observacion=this.planillaForm.get('nota').value;
 
 
         //console.log(JSON.stringify(this.planillaForm.value));

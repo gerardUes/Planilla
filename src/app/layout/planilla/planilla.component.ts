@@ -8,6 +8,7 @@ import { TiposPlanilla } from '../formPlanilla/form-planilla/modeloPlanilla/Tipo
 import { PlanillaService } from '../servicio/planilla.service';
 import { EditarPlanillaComponent } from './editar-planilla/editar-planilla.component';
 import Swal from 'sweetalert2';
+import { TotalesResumen } from '../formPlanilla/form-planilla/modeloPlanilla/TotalesResumen';
 
 @Component({
     selector: 'app-planilla',
@@ -22,6 +23,7 @@ export class PlanillaComponent implements OnInit {
     totalEgresos:number;
     totalDeducciones:number;
     totalPrestaciones:number;
+    totalesResumenLst:Array<TotalesResumen>;
 
     anioConsulta: number;
     mesConsulta: number;
@@ -103,8 +105,9 @@ export class PlanillaComponent implements OnInit {
             .obtenerHorasXtras(
                 data.programacionPlaPK.codCia,
                 data.programacionPlaPK.periodo,
-                data.programacionPlaPK.secuencia,
-                data.programacionPlaPK.codTipopla
+                data.mes,
+                data.programacionPlaPK.codTipopla,
+                data.numPlanilla
             )
             .subscribe((horasExtras) => {
                 this.listaHorasExtras = horasExtras;
@@ -168,8 +171,51 @@ export class PlanillaComponent implements OnInit {
 
     asignarTotales(data: any) {
         this.objetoTotales = data;
+        this.totalesResumenLst=[];
+        
+       this.llenarListado(this.objetoTotales);
+
         this.totalEgresos= this.objetoTotales.deducciones+this.objetoTotales.liqRecibir;
         this.totalIngresos=this.objetoTotales.sueldoBase+this.objetoTotales.comisiones+this.objetoTotales.prestaciones+this.objetoTotales.vhHora;
+    }
+
+    llenarListado(objeto:any){
+        let sueldoBaseResume= new TotalesResumen();
+        sueldoBaseResume.tipo='I';
+        sueldoBaseResume.concepto='Sueldo Bruto';
+        sueldoBaseResume.ingresoCta=objeto.sueldoBase;
+        this.totalesResumenLst.push(sueldoBaseResume);
+        
+        let comisionesResume= new TotalesResumen();
+        comisionesResume.tipo='I';
+        comisionesResume.concepto='Comisiones';
+        comisionesResume.ingresoCta=objeto.comisiones;
+        this.totalesResumenLst.push(comisionesResume);
+         
+        let prestacionesResume= new TotalesResumen();
+        prestacionesResume.tipo='I';
+        prestacionesResume.concepto='Prestaciones';
+        prestacionesResume.ingresoCta=objeto.prestaciones;
+        this.totalesResumenLst.push(prestacionesResume);
+
+        let horasxtrasResume= new TotalesResumen();
+        horasxtrasResume.tipo='I';
+        horasxtrasResume.concepto='Horas Extras';
+        horasxtrasResume.ingresoCta=objeto.vhHora;
+        this.totalesResumenLst.push(horasxtrasResume);
+
+        let deduccionResume= new TotalesResumen();
+        deduccionResume.tipo='E';
+        deduccionResume.concepto='Deducciones';
+        deduccionResume.egresoCta=objeto.deducciones;
+        this.totalesResumenLst.push(deduccionResume);
+
+        let liquidoResume= new TotalesResumen();
+        liquidoResume.tipo='E';
+        liquidoResume.concepto='Liquido';
+        liquidoResume.egresoCta=objeto.liqRecibir;
+        this.totalesResumenLst.push(liquidoResume);
+            
     }
 
     irEditar() {

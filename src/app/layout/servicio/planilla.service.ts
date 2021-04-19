@@ -58,8 +58,8 @@ export class PlanillaService {
 
 
 
-  obtenerHorasXtras(cia:any,anio:any,secuencia:any,tipo:any):Observable<any>{
-    return this.http.get('http://138.128.245.244:8445/infosweb/api/v1/rrhh/planilla/horas-extras-by-programacion/'+cia+'/'+anio+'/'+secuencia+'/'+tipo);
+  obtenerHorasXtras(cia:any,anio:any,secuencia:any,tipo:any,numPla:any):Observable<any>{
+    return this.http.get('http://138.128.245.244:8445/infosweb/api/v1/rrhh/planilla/find-hx-by-programacion-pla-enc/'+cia+'/'+anio+'/'+secuencia+'/'+tipo+'/'+numPla);
   }
 
   guardarPlanilla(objeto:any):Observable<any>{

@@ -159,90 +159,42 @@
     </div>
 </div>
 
-<div class="row my-2" *ngIf="verResumenPlanilla && !flagEditar ">
-    <div class="col-xl-6 text-xs-center">
-        <div class="card mb-2">
+<div class="row my-2 rounded-left  rounded-right" *ngIf="verResumenPlanilla && !flagEditar ">
+    <div class="col-xl-6 text-xs-center" >
+        <div class="card mb-2" style="border-radius: 20px;">
             <div class="card-header" style="background-color:blue;color: white;">
                 <h5>Resumen Planilla</h5>
             </div>
             <div class="card-body">
                 <div class="row" style="background-color:blue;color: white;" *ngIf="objetoTotales">
-                    <div class="col-xs-6 col-sm-6" style="border:1px solid black;">
-                        <h5><strong>Ingresos</strong></h5>
-
-
-                        <table class="table table-hover text-nowrap">
-                            <thead>
-                              <tr>
-
-
-                                <th scope="col">Concepto</th>
-                                <th scope="col">Unique Purchases</th>
-                                <th scope="col">Quantity</th>
-                                <th scope="col">Product Revenue</th>
-                                <th scope="col">Avg. Price</th>
-                              </tr>
-                            </thead>
-                            <tbody>
-
-                              <tr>
-                                <td>
-                                  <span class="text-success">
-                                    <i class="fas fa-caret-up me-1"></i><span>14.0%</span>
-                                  </span>
-                                </td>
-                              </tr>
-                            </tbody>
-                          </table>
-
-
-
-                        <ul class="list-group" style="color: black;">
-                            <li class="list-group-item d-flex justify-content-between align-items-center"><strong>Sueldo
-                                    Bruto:</strong>
-                                <p>{{objetoTotales.sueldoBase | currency }}</p>
-                            </li>
-                            <li class="list-group-item d-flex justify-content-between align-items-center">
-                                <strong>Comisiones:</strong>
-                                <p>{{objetoTotales.comisiones | currency}}</p>
-                            </li>
-                            <li class="list-group-item d-flex justify-content-between align-items-center ">
-                                <strong>Prestaciones:</strong>
-                                <p>{{objetoTotales.prestaciones | currency}} </p>
-                            </li>
-                            <li class="list-group-item d-flex justify-content-between align-items-center "><strong>Horas
-                                    Extras:</strong>
-                                <p> {{objetoTotales.vhHora | currency}} </p>
-                            </li>
-                        </ul>
-                        <div class="my-2">
-                            <h5><strong>Total {{totalIngresos | currency}}</strong></h5>
-                        </div>
-
-                    </div>
-
-                    <div class="col-xs-6 col-sm-6" style="border:1px solid black;">
-                        <h5><strong>Egresos</strong></h5>
-                        <ul class="list-group" style="color: black;">
-                            <li class="list-group-item d-flex justify-content-between align-items-center">
-                                <strong>Deducciones:</strong>
-                                <p>{{objetoTotales.deducciones | currency}}</p>
-                            </li>
-                            <li class="list-group-item d-flex justify-content-between align-items-center">
-                                <strong>Liquido:</strong>
-                                <p>{{objetoTotales.liqRecibir | currency}}</p>
-                            </li>
-                            <li class="list-group-item d-flex justify-content-between align-items-center"></li>
-                            <li class="list-group-item d-flex justify-content-between align-items-center"></li>
-                            <li class="list-group-item d-flex justify-content-between align-items-center"></li>
-                            <li class="list-group-item d-flex justify-content-between align-items-center"></li>
-                            <li class="list-group-item d-flex justify-content-between align-items-center"></li>
-                            <li class="list-group-item d-flex justify-content-between align-items-center"></li>
-                        </ul>
-                        <div class="mb-3">
-                            <h5><strong>Total {{totalEgresos | currency}}</strong></h5>
-                        </div>
-                    </div>
+                    <table class="table table-borderless" >
+                        <colgroup>
+                            <col class="con1" style="align: center; width: 30%" />
+                            <col class="con1" style="align: center; width: 20%" />
+                            <col class="con0" style="align: center; width: 20%" />
+                        </colgroup>           
+                        <thead>
+                            <tr>
+                                <th style="color: white;">Concepto</th>
+                                <th style="text-align: right;color: white;" >Ingreso</th>
+                                <th style="text-align: right;color: white;" >Egreso</th>
+                                
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let item of totalesResumenLst" >
+                                <td><strong>{{item.concepto}}</strong></td>
+                                <td style="text-align: right;"><span *ngIf="item.tipo=='I'" >{{item.ingresoCta | currency }}</span></td>
+                                <td style="text-align: right;" ><span *ngIf="item.tipo=='E'" >{{item.egresoCta | currency }}</span></td>
+                               
+                            </tr>
+                            <tr>
+                                <td colspan="1" class="checkout"><a href="#">Totales</a></td>
+                                <td style="text-align: right;color: blue;" >{{totalIngresos | currency}}</td>
+                                <td style="text-align: right;color: blue;" >{{totalEgresos | currency}}</td>
+                            </tr>                                             
+                        </tbody>
+                    </table> 
                 </div>
             </div>
         </div>
@@ -304,22 +256,14 @@
                     <table class="table table-hover" >
                         <thead>
                             <tr>
-                                <th scope="col">cod emp</th>
-                                <th scope="col">Nombre</th>
-                                <th scope="col">Simples</th>
-                                <th scope="col">Dobles</th>
-                                <th scope="col">Medica simple</th>
-                                <th scope="col">Medica doble</th>
+                                <th scope="col">Concepto</th>
+                                <th scope="col" style="text-align: right;" >Valor</th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr *ngFor="let item of listaHorasExtras">
-                                <th scope="row">{{item.empleados.empleadosPK.codEmp}}</th>
-                                <td>{{item.empleados.nombres}} {{item.empleados.apellidos}}</td>
-                                <td style="text-align: right;">{{item.vhXsencilla | currency }}</td>
-                                <td style="text-align: right;">{{item.vhXdoble | currency }}</td>
-                                <td style="text-align: right;">{{item.vhX150 | currency}}</td>
-                                <td style="text-align: right;">{{item.vhX250 | currency }}</td>
+                                <th scope="row">{{item.concepto}}</th>
+                                <td style="text-align: right;">{{item.valor | currency }}</td>
                             </tr>
 
                         </tbody>

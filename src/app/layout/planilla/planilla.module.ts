@@ -8,8 +8,12 @@ import { FormsModule,ReactiveFormsModule } from '@angular/forms';
 import { NgbDate, NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { NgxMaskModule, IConfig } from 'ngx-mask'
 
+
 @NgModule({
     imports: [  NgxMaskModule.forRoot(),CommonModule, PlanillaRoutingModule, PageHeaderModule,NgbModule,FormsModule,ReactiveFormsModule],
     declarations: [PlanillaComponent, EditarPlanillaComponent]
 })
-export class PlanillaModule {}
+
+export class PlanillaModule {
+
+}

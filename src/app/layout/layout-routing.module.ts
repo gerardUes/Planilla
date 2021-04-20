@@ -13,6 +13,7 @@ const routes: Routes = [
                 loadChildren: () => import('./dashboard/dashboard.module').then((m) => m.DashboardModule)
             },
             { path: 'planilla', loadChildren: () => import('./planilla/planilla.module').then((m) => m.PlanillaModule) },
+            { path: 'expediente', loadChildren: () => import('./expediente-empleado/expediente.module').then((m) => m.ExpedienteModule) },
             { path: 'formPlanilla', loadChildren: () => import('./formPlanilla/form-module-planilla/form-module-planilla.module').then((m) => m.FormModulePlanillaModule) },
             { path: 'charts', loadChildren: () => import('./charts/charts.module').then((m) => m.ChartsModule) },
             { path: 'tables', loadChildren: () => import('./tables/tables.module').then((m) => m.TablesModule) },

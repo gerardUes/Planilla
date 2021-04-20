@@ -10,6 +10,7 @@ import { LayoutComponent } from './layout.component';
 import { CustomDateParserFormatter } from './date-picker/datepicker-formatter';
 
 
+
 @NgModule({
     imports: [CommonModule, LayoutRoutingModule, TranslateModule, NgbDropdownModule],
     declarations: [LayoutComponent, SidebarComponent, HeaderComponent],

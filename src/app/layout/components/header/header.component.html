@@ -141,9 +141,13 @@
                     <i class="fa fa-fw fa-dashboard"></i>&nbsp;
                     <span>{{ 'Lista Planilla' | translate }}</span>
                 </a>
-                <a class="dropdown-item" href="javascript:void(0)">
-                    <i class="fa fa-fw fa-envelope"></i> {{ 'Inbox' | translate }}
+                
+                <a [routerLinkActive]="['router-link-active']" class="list-group-item" routerLink="/expediente">
+                    <i class="fa fa-users"></i>&nbsp;
+                    <span>{{ 'Expediente Empleado' | translate }}</span>
                 </a>
+
+
                 <a class="dropdown-item" href="javascript:void(0)">
                     <i class="fa fa-fw fa-gear"></i> {{ 'Settings' | translate }}
                 </a>

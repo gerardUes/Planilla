@@ -1,0 +1,58 @@
+.drawer {
+    position: relative;
+    box-sizing: border-box;
+    width: 300px;
+  }
+  .drawer input {
+    width: 100%;
+    height: 60px;
+    position: absolute;
+    opacity: 0;
+    top: 0;
+    left: 0;
+    margin: 0;
+    z-index: 3;
+    cursor: pointer;
+  }
+  .drawer__name {
+    display: flex;
+    justify-content: space-between;
+    border: 1px solid black;
+    padding: 10px;
+    color: white;
+    background:rgb(6, 74, 199) ;
+  }
+  .drawer__content {
+    border: 1px solid black;
+    box-sizing: border-box;
+    width: 100%;
+    margin: 0;
+    height: 0;
+    opacity: 0;
+    pointer-events: none;
+    list-style: none;
+    transition: padding 0.2s;
+  }
+  .drawer input:checked ~ .drawer__content {
+    height: 100%;
+    opacity: 1;
+    pointer-events: initial;
+    padding: 10px 0;
+  }
+  .drawer__arrow {
+    font-weight: 900;
+    font-size: 1.2rem;
+    transition: transform 0.2s;
+  }
+  .drawer input:checked ~ .drawer__name > .drawer__arrow {
+    transform: rotateZ(90deg);
+  }
+  .drawer__content li {
+    padding: 10px;
+    cursor: pointer;
+    color: blue;
+  }
+  .drawer__content li:hover {
+    color: rebeccapurple;
+    text-decoration: underline;
+  }

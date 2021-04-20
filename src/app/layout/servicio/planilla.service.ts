@@ -36,6 +36,13 @@ export class PlanillaService {
   }
 
 
+  obtenerDetalleHorasExtras(cia:any,anio:any,mes:any,tipo:any,numpla:any,orden:any):Observable<any>{
+    return this.http.get(this.baseUrl+'find-detalle-resumen-by-programacion-pla/'+cia+'/'+anio+'/'+mes+'/'+tipo+'/'+numpla+'/'+orden).pipe(catchError(this.handleError));
+  }
+
+
+
+
   generarPlanillaSevice(objeto:any):Observable<any>{
     return this.http.post(this.baseUrl+'generar-planilla', objeto).pipe(catchError(this.handleError));
   }

@@ -16,7 +16,7 @@ import { TotalesResumen } from '../formPlanilla/form-planilla/modeloPlanilla/Tot
     styleUrls: ['./planilla.component.css']
 })
 export class PlanillaComponent implements OnInit {
-    
+
     tipoAccion:string;
     tipo:string;
     totalIngresos:number;
@@ -24,6 +24,9 @@ export class PlanillaComponent implements OnInit {
     totalDeducciones:number;
     totalPrestaciones:number;
     totalesResumenLst:Array<TotalesResumen>;
+
+    listaDetalleHX:Array<any>=[];
+
 
     anioConsulta: number;
     mesConsulta: number;
@@ -172,7 +175,7 @@ export class PlanillaComponent implements OnInit {
     asignarTotales(data: any) {
         this.objetoTotales = data;
         this.totalesResumenLst=[];
-        
+
        this.llenarListado(this.objetoTotales);
 
         this.totalEgresos= this.objetoTotales.deducciones+this.objetoTotales.liqRecibir;
@@ -185,13 +188,13 @@ export class PlanillaComponent implements OnInit {
         sueldoBaseResume.concepto='Sueldo Bruto';
         sueldoBaseResume.ingresoCta=objeto.sueldoBase;
         this.totalesResumenLst.push(sueldoBaseResume);
-        
+
         let comisionesResume= new TotalesResumen();
         comisionesResume.tipo='I';
         comisionesResume.concepto='Comisiones';
         comisionesResume.ingresoCta=objeto.comisiones;
         this.totalesResumenLst.push(comisionesResume);
-         
+
         let prestacionesResume= new TotalesResumen();
         prestacionesResume.tipo='I';
         prestacionesResume.concepto='Prestaciones';
@@ -215,7 +218,7 @@ export class PlanillaComponent implements OnInit {
         liquidoResume.concepto='Liquido';
         liquidoResume.egresoCta=objeto.liqRecibir;
         this.totalesResumenLst.push(liquidoResume);
-            
+
     }
 
     irEditar() {
@@ -298,7 +301,7 @@ cerrarPlanilla(){
     programacionPadre.programacionPlaPK=programacionLLave;
 
     console.log('lo que mando:'+JSON.stringify(programacionPadre));
-    
+
     this.servicio.cerrarPlanillaSevice(programacionPadre).subscribe(
         respuesta=>{
            if(respuesta){
@@ -311,14 +314,14 @@ cerrarPlanilla(){
                 confirmButtonColor: '#3085d6',
                 confirmButtonText: 'Cerrar'
               }).then(()=> {
-              
-                this.redireccionar(); 
-              
+
+                this.redireccionar();
+
               })
            }
         }
     );
-        
+
 }
 
 
@@ -332,7 +335,7 @@ generarPlanilla(){
     programacionPadre.programacionPlaPK=new ProgramacionPlaPK();
     programacionPadre.programacionPlaPK=programacionLLave;
 
-    
+
     this.servicio.generarPlanillaSevice(programacionPadre).subscribe(
         respuesta=>{
             console.log('Respuesta Generacion:'+JSON.stringify(respuesta));
@@ -346,9 +349,9 @@ generarPlanilla(){
                 confirmButtonColor: '#3085d6',
                 confirmButtonText: 'Cerrar'
               }).then(()=> {
-              
-                this.redireccionar(); 
-              
+
+                this.redireccionar();
+
               })
            }
         }
@@ -361,10 +364,26 @@ generarPlanilla(){
 
 
 redireccionar(){
-    
+
     this.verResumenPlanilla=false;
     this.filtroPantalla();
     this.router.navigate(['./planilla']);
+}
+
+
+
+llenadoHorasExtrasDetalle(param:any){
+//console.log('valor que viene del encabezado hx:'+JSON.stringify(param));
+
+
+this.servicio.obtenerDetalleHorasExtras(param.codCia,param.anio,param.mes,
+    param.tipoPlanilla,param.numPlanilla,
+    param.orden).subscribe(
+        dataHX=>{
+            this.listaDetalleHX=dataHX;
+            console.log('Detalle horas extras:'+JSON.stringify(this.listaDetalleHX));
+        }
+    );
 }
 
 

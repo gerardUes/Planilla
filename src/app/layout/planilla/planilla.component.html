@@ -172,13 +172,13 @@
                             <col class="con1" style="align: center; width: 30%" />
                             <col class="con1" style="align: center; width: 20%" />
                             <col class="con0" style="align: center; width: 20%" />
-                        </colgroup>           
+                        </colgroup>
                         <thead>
                             <tr>
                                 <th style="color: white;">Concepto</th>
                                 <th style="text-align: right;color: white;" >Ingreso</th>
                                 <th style="text-align: right;color: white;" >Egreso</th>
-                                
+
                             </tr>
                         </thead>
                         <tbody>
@@ -186,15 +186,15 @@
                                 <td><strong>{{item.concepto}}</strong></td>
                                 <td style="text-align: right;"><span *ngIf="item.tipo=='I'" >{{item.ingresoCta | currency }}</span></td>
                                 <td style="text-align: right;" ><span *ngIf="item.tipo=='E'" >{{item.egresoCta | currency }}</span></td>
-                               
+
                             </tr>
                             <tr>
                                 <td colspan="1" class="checkout"><a href="#">Totales</a></td>
                                 <td style="text-align: right;color: blue;" >{{totalIngresos | currency}}</td>
                                 <td style="text-align: right;color: blue;" >{{totalEgresos | currency}}</td>
-                            </tr>                                             
+                            </tr>
                         </tbody>
-                    </table> 
+                    </table>
                 </div>
             </div>
         </div>
@@ -261,7 +261,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr *ngFor="let item of listaHorasExtras">
+                            <tr *ngFor="let item of listaHorasExtras" (click)="llenadoHorasExtrasDetalle(item)">
                                 <th scope="row">{{item.concepto}}</th>
                                 <td style="text-align: right;">{{item.valor | currency }}</td>
                             </tr>

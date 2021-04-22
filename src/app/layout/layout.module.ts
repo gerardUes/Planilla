@@ -8,12 +8,13 @@ import { SidebarComponent } from './components/sidebar/sidebar.component';
 import { LayoutRoutingModule } from './layout-routing.module';
 import { LayoutComponent } from './layout.component';
 import { CustomDateParserFormatter } from './date-picker/datepicker-formatter';
+import { AccionPersonalComponent } from './accion-personal/accion-personal.component';
 
 
 
 @NgModule({
     imports: [CommonModule, LayoutRoutingModule, TranslateModule, NgbDropdownModule],
-    declarations: [LayoutComponent, SidebarComponent, HeaderComponent],
+    declarations: [LayoutComponent, SidebarComponent, HeaderComponent, AccionPersonalComponent],
     providers: [{ provide: NgbDateParserFormatter, useClass: CustomDateParserFormatter }]
 })
 export class LayoutModule {}

@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { AccionPersonalComponent } from './accion-personal/accion-personal.component';
 import { LayoutComponent } from './layout.component';
 
 const routes: Routes = [
@@ -14,6 +15,7 @@ const routes: Routes = [
             },
             { path: 'planilla', loadChildren: () => import('./planilla/planilla.module').then((m) => m.PlanillaModule) },
             { path: 'expediente', loadChildren: () => import('./expediente-empleado/expediente.module').then((m) => m.ExpedienteModule) },
+            { path: 'accion-personal', component:AccionPersonalComponent },
             { path: 'formPlanilla', loadChildren: () => import('./formPlanilla/form-module-planilla/form-module-planilla.module').then((m) => m.FormModulePlanillaModule) },
             { path: 'charts', loadChildren: () => import('./charts/charts.module').then((m) => m.ChartsModule) },
             { path: 'tables', loadChildren: () => import('./tables/tables.module').then((m) => m.TablesModule) },

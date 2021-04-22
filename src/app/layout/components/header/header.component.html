@@ -147,13 +147,12 @@
                     <span>{{ 'Expediente Empleado' | translate }}</span>
                 </a>
 
+                <a [routerLinkActive]="['router-link-active']" class="list-group-item" routerLink="/accion-personal">
+                    <i class="fa fa-folder-open"></i>&nbsp;
+                    <span>{{ 'Accion de personal' | translate }}</span>
+                </a>
 
-                <a class="dropdown-item" href="javascript:void(0)">
-                    <i class="fa fa-fw fa-gear"></i> {{ 'Settings' | translate }}
-                </a>
-                <a (click)="onLoggedout()" [routerLink]="['/login']" class="dropdown-item">
-                    <i class="fa fa-fw fa-power-off"></i> {{ 'Log Out' | translate }}
-                </a>
+
             </div>
         </li>
       </ul>

@@ -137,11 +137,11 @@
                 <i class="fa fa-user"></i> Planilla <b class="caret"></b>
             </a>
             <div class="dropdown-menu-right" ngbDropdownMenu>
-                <a [routerLinkActive]="['router-link-active']" class="list-group-item" routerLink="/planilla">
+                <a [routerLinkActive]="['router-link-active']" class="list-group-item" routerLink="/planilla" (click)="modificarEdicion()">
                     <i class="fa fa-fw fa-dashboard"></i>&nbsp;
                     <span>{{ 'Lista Planilla' | translate }}</span>
                 </a>
-                
+
                 <a [routerLinkActive]="['router-link-active']" class="list-group-item" routerLink="/expediente">
                     <i class="fa fa-users"></i>&nbsp;
                     <span>{{ 'Expediente Empleado' | translate }}</span>

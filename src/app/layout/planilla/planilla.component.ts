@@ -9,6 +9,8 @@ import { PlanillaService } from '../servicio/planilla.service';
 import { EditarPlanillaComponent } from './editar-planilla/editar-planilla.component';
 import Swal from 'sweetalert2';
 import { TotalesResumen } from '../formPlanilla/form-planilla/modeloPlanilla/TotalesResumen';
+import { ReportesService } from '../servicio/reportes.service';
+import { DomSanitizer } from '@angular/platform-browser';
 
 @Component({
     selector: 'app-planilla',
@@ -16,7 +18,11 @@ import { TotalesResumen } from '../formPlanilla/form-planilla/modeloPlanilla/Tot
     styleUrls: ['./planilla.component.css']
 })
 export class PlanillaComponent implements OnInit {
-
+    pdfDeduc:any;
+    pdfCertificacion:any;
+    pdfEfectivo:any;
+    pdfBoleta:any;
+    certificado:any;
     tipoAccion:string;
     tipo:string;
     totalIngresos:number;
@@ -24,6 +30,8 @@ export class PlanillaComponent implements OnInit {
     totalDeducciones:number;
     totalPrestaciones:number;
     totalesResumenLst:Array<TotalesResumen>;
+    listaFormatoReportes:Array<any>;
+
 
     listaDetalleHX:Array<any>=[];
 
@@ -58,10 +66,25 @@ export class PlanillaComponent implements OnInit {
     flagEditar: boolean = false;
     programacionPla: any;
 
+
+
     @ViewChild(EditarPlanillaComponent) hijo: EditarPlanillaComponent;
 
-    constructor(public servicio: PlanillaService, private modalService: NgbModal, private router: Router) {
+    constructor(private domSanitizer: DomSanitizer,public servicio: PlanillaService, private modalService: NgbModal, private router: Router,private servicioReportes:ReportesService) {
         this.verResumenPlanilla = false;
+
+        this.pdfCertificacion = this.domSanitizer.bypassSecurityTrustResourceUrl(
+            ''
+          );
+
+          this.pdfDeduc = this.domSanitizer.bypassSecurityTrustResourceUrl(
+            ''
+          );
+
+          this.pdfEfectivo=this.domSanitizer.bypassSecurityTrustResourceUrl(
+            ''
+          );
+
         let deadline: Date = new Date();
         //console.log(deadline);
         //console.log(deadline.getDate());
@@ -100,7 +123,7 @@ export class PlanillaComponent implements OnInit {
         this.servicio.objetoPlanillaServicio = data;
         this.programacionPla = data;
 
-
+        this.obtenerFormatoReportes();
 
         this.hijo.hola(data);
 
@@ -140,6 +163,8 @@ export class PlanillaComponent implements OnInit {
                     }
                 );
 
+                this.servicio.setBanderaInicio=false;
+
 }
 
     open(content) {
@@ -168,6 +193,7 @@ export class PlanillaComponent implements OnInit {
     }
 
     resetPantalla() {
+        this.servicio.setBanderaInicio=false;
         this.verResumenPlanilla = !this.verResumenPlanilla;
         this.flagEditar = false;
     }
@@ -325,6 +351,52 @@ cerrarPlanilla(){
 }
 
 
+
+
+
+
+confirmacionCerrarPlanilla(){
+    Swal.fire({
+        title: 'Esta seguro?',
+        text: "Cerrar planilla",
+        icon: 'question',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Cerrar Planilla',
+        cancelButtonText:'Salir'
+      }).then((result) => {
+        if (result.isConfirmed) {
+
+        this.cerrarPlanilla();
+
+        }
+      })
+}
+
+
+
+confirmacionGenerarPlanilla(){
+    Swal.fire({
+        title: 'Esta seguro?',
+        text: "Generar planilla",
+        icon: 'question',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Generar',
+        cancelButtonText:'Cancelar'
+      }).then((result) => {
+        if (result.isConfirmed) {
+
+        this.generarPlanilla();
+
+        }
+      })
+
+}
+
+
 generarPlanilla(){
 
     let programacionLLave=new ProgramacionPlaPK();
@@ -339,10 +411,11 @@ generarPlanilla(){
     this.servicio.generarPlanillaSevice(programacionPadre).subscribe(
         respuesta=>{
             console.log('Respuesta Generacion:'+JSON.stringify(respuesta));
+            this.servicio.objetoPlanillaServicio =respuesta;
            if(respuesta){
             Swal.fire({
                 title: 'Registro de planilla',
-                text: 'Planilla Generada con exito',
+                text: 'Planilla Generada con exito.',
                 icon: 'success',
                 allowOutsideClick: false,
                 showCancelButton: false,
@@ -367,7 +440,10 @@ redireccionar(){
 
     this.verResumenPlanilla=false;
     this.filtroPantalla();
-    this.router.navigate(['./planilla']);
+    this.verResumenPlanilla=true;
+    this.flagEditar=false;
+    this.verDetalle(this.servicio.objetoPlanillaServicio);
+
 }
 
 
@@ -385,6 +461,256 @@ this.servicio.obtenerDetalleHorasExtras(param.codCia,param.anio,param.mes,
         }
     );
 }
+
+
+
+
+
+imprimirReporte(){
+this.servicioReportes.generarReportePlanilla(this.servicio.objetoPlanillaServicio.programacionPlaPK.codCia,
+    this.servicio.objetoPlanillaServicio.anio,this.servicio.objetoPlanillaServicio.programacionPlaPK.secuencia,
+    this.servicio.objetoPlanillaServicio.tiposPlanilla.tiposPlanillaPK.codTipopla).subscribe(
+        data=>{
+            console.log('Respuesta Reporte:'+JSON.stringify(data));
+            this.showCertificacion(data.archivo);
+        }
+    );
+}
+
+
+
+showCertificacion(datos: string) {
+    this.certificado = datos;
+    let resultado: string = datos;
+
+    atob(resultado);
+
+    const b64toBlob = (b64Data, contentType = "", sliceSize = 512) => {
+      const byteCharacters = atob(b64Data);
+      const byteArrays = [];
+
+      for (
+        let offset = 0;
+        offset < byteCharacters.length;
+        offset += sliceSize
+      ) {
+        const slice = byteCharacters.slice(offset, offset + sliceSize);
+
+        const byteNumbers = new Array(slice.length);
+        for (let i = 0; i < slice.length; i++) {
+          byteNumbers[i] = slice.charCodeAt(i);
+        }
+
+        const byteArray = new Uint8Array(byteNumbers);
+        byteArrays.push(byteArray);
+      }
+
+      const blob = new Blob(byteArrays, { type: contentType });
+      return blob;
+    };
+
+    const contentType = "application/pdf";
+    const b64Data = resultado;
+
+    const blob = b64toBlob(b64Data, contentType);
+    const blobUrl = URL.createObjectURL(blob);
+    this.pdfCertificacion = this.domSanitizer.bypassSecurityTrustResourceUrl(
+      blobUrl
+    );
+  }
+
+
+  mostrarDeducReporte(datos: string) {
+    this.certificado = datos;
+    let resultado: string = datos;
+
+    atob(resultado);
+
+    const b64toBlob = (b64Data, contentType = "", sliceSize = 512) => {
+      const byteCharacters = atob(b64Data);
+      const byteArrays = [];
+
+      for (
+        let offset = 0;
+        offset < byteCharacters.length;
+        offset += sliceSize
+      ) {
+        const slice = byteCharacters.slice(offset, offset + sliceSize);
+
+        const byteNumbers = new Array(slice.length);
+        for (let i = 0; i < slice.length; i++) {
+          byteNumbers[i] = slice.charCodeAt(i);
+        }
+
+        const byteArray = new Uint8Array(byteNumbers);
+        byteArrays.push(byteArray);
+      }
+
+      const blob = new Blob(byteArrays, { type: contentType });
+      return blob;
+    };
+
+    const contentType = "application/pdf";
+    const b64Data = resultado;
+
+    const blob = b64toBlob(b64Data, contentType);
+    const blobUrl = URL.createObjectURL(blob);
+    this.pdfDeduc = this.domSanitizer.bypassSecurityTrustResourceUrl(
+      blobUrl
+    );
+  }
+
+
+
+  imprimirDeduccionReporte(){
+
+
+    this.servicioReportes.generarReporteDeducciones(this.servicio.objetoPlanillaServicio.programacionPlaPK.codCia,
+        this.servicio.objetoPlanillaServicio.anio,this.servicio.objetoPlanillaServicio.programacionPlaPK.secuencia,
+        this.servicio.objetoPlanillaServicio.tiposPlanilla.tiposPlanillaPK.codTipopla).subscribe(
+            data=>{
+                console.log('Respuesta blobUrl:'+JSON.stringify(data));
+                this.mostrarDeducReporte(data.archivo);
+            }
+        );
+
+  }
+
+
+
+
+
+  mostrarReporteEfectivo(datos: string) {
+    this.certificado = datos;
+    let resultado: string = datos;
+
+    atob(resultado);
+
+    const b64toBlob = (b64Data, contentType = "", sliceSize = 512) => {
+      const byteCharacters = atob(b64Data);
+      const byteArrays = [];
+
+      for (
+        let offset = 0;
+        offset < byteCharacters.length;
+        offset += sliceSize
+      ) {
+        const slice = byteCharacters.slice(offset, offset + sliceSize);
+
+        const byteNumbers = new Array(slice.length);
+        for (let i = 0; i < slice.length; i++) {
+          byteNumbers[i] = slice.charCodeAt(i);
+        }
+
+        const byteArray = new Uint8Array(byteNumbers);
+        byteArrays.push(byteArray);
+      }
+
+      const blob = new Blob(byteArrays, { type: contentType });
+      return blob;
+    };
+
+    const contentType = "application/pdf";
+    const b64Data = resultado;
+
+    const blob = b64toBlob(b64Data, contentType);
+    const blobUrl = URL.createObjectURL(blob);
+    this.pdfEfectivo = this.domSanitizer.bypassSecurityTrustResourceUrl(
+      blobUrl
+    );
+  }
+
+
+
+  mostrarReporteBoleta(datos: string) {
+    this.certificado = datos;
+    let resultado: string = datos;
+
+    atob(resultado);
+
+    const b64toBlob = (b64Data, contentType = "", sliceSize = 512) => {
+      const byteCharacters = atob(b64Data);
+      const byteArrays = [];
+
+      for (
+        let offset = 0;
+        offset < byteCharacters.length;
+        offset += sliceSize
+      ) {
+        const slice = byteCharacters.slice(offset, offset + sliceSize);
+
+        const byteNumbers = new Array(slice.length);
+        for (let i = 0; i < slice.length; i++) {
+          byteNumbers[i] = slice.charCodeAt(i);
+        }
+
+        const byteArray = new Uint8Array(byteNumbers);
+        byteArrays.push(byteArray);
+      }
+
+      const blob = new Blob(byteArrays, { type: contentType });
+      return blob;
+    };
+
+    const contentType = "application/pdf";
+    const b64Data = resultado;
+
+    const blob = b64toBlob(b64Data, contentType);
+    const blobUrl = URL.createObjectURL(blob);
+    this.pdfBoleta = this.domSanitizer.bypassSecurityTrustResourceUrl(
+      blobUrl
+    );
+  }
+
+
+
+
+
+
+
+  imprimirReporteEfectivo(){
+
+
+    this.servicioReportes.generarReportePagoEfectivo(this.servicio.objetoPlanillaServicio.programacionPlaPK.codCia,
+        this.servicio.objetoPlanillaServicio.anio,this.servicio.objetoPlanillaServicio.programacionPlaPK.secuencia,
+        this.servicio.objetoPlanillaServicio.tiposPlanilla.tiposPlanillaPK.codTipopla).subscribe(
+            data=>{
+                //console.log('Respuesta blobUrl:'+JSON.stringify(data));
+                this.mostrarReporteEfectivo(data.archivo);
+            }
+        );
+
+
+  }
+
+  obtenerFormatoReportes(){
+    this.servicioReportes.obtenerTiposReportes(this.servicio.objetoPlanillaServicio.programacionPlaPK.codCia,'RRHH_PORTAL',4
+        ).subscribe(
+            data=>{
+                console.log('Respuesta formatos:'+JSON.stringify(data));
+                this.listaFormatoReportes=data;
+            }
+        );
+
+  }
+
+
+
+  onChangeFormato(valor:any){
+      console.log('LO QUE VIENE:'+valor);
+
+      this.servicioReportes.generarReporteBoletas(this.servicio.objetoPlanillaServicio.programacionPlaPK.codCia,
+        this.servicio.objetoPlanillaServicio.anio,this.servicio.objetoPlanillaServicio.programacionPlaPK.secuencia,
+        this.servicio.objetoPlanillaServicio.tiposPlanilla.tiposPlanillaPK.codTipopla,valor).subscribe(
+            data=>{
+                //console.log('Respuesta blobUrl:'+JSON.stringify(data));
+               this.mostrarReporteBoleta(data.archivo);
+            }
+        );
+
+  }
+
+
 
 
 }

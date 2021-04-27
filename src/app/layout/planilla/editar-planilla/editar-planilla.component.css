@@ -8,3 +8,8 @@
 .field_set{
     border:blue 5px solid;
   }
+
+
+  label {
+      font-weight: bolder;
+  }

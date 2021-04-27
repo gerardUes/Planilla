@@ -163,18 +163,33 @@ export class EditarPlanillaComponent implements OnInit {
         objetoPlanilla.programacionPlaPK.periodo=Number(this.planillaForm.get('anio').value);
         objetoPlanilla.programacionPlaPK.codTipopla=this.planillaForm.get('codTipopla').value;
         objetoPlanilla.quincena=Number(this.planillaForm.get('periodo').value);
-        objetoPlanilla.status='G';
+       /// objetoPlanilla.status='G';
         objetoPlanilla.anio=Number(this.planillaForm.get('anio').value);
         objetoPlanilla.mes=Number(this.planillaForm.get('mese').value);
+        if(this.fechaInicial){
         const fechaConstDate=this.fechaInicial;
         objetoPlanilla.fechaInicial=fechaConstDate.day+'/'+fechaConstDate.month+'/'+fechaConstDate.year;
+
+        }
+
+
+        if(this.fechaFinal){
         const fechaFinalConstDate=this.fechaFinal;
         objetoPlanilla.fechaFinal=fechaFinalConstDate.day+'/'+fechaFinalConstDate.month+'/'+fechaFinalConstDate.year;
+        }
+
+        if(this.fechaInicialHX){
         const fechaInicioHXConstDate=this.fechaInicialHX;
         objetoPlanilla.fechaInicioHx=fechaInicioHXConstDate.day+'/'+fechaInicioHXConstDate.month+'/'+fechaInicioHXConstDate.year;
 
-        const fechaFinalHXConstDate=this.fechaFinalHX;
-        objetoPlanilla.fechaFinHx=fechaFinalHXConstDate.day+'/'+fechaFinalHXConstDate.month+'/'+fechaFinalHXConstDate.year;
+        }
+
+        if(this.fechaFinalHX){
+
+            const fechaFinalHXConstDate=this.fechaFinalHX;
+            objetoPlanilla.fechaFinHx=fechaFinalHXConstDate.day+'/'+fechaFinalHXConstDate.month+'/'+fechaFinalHXConstDate.year;
+
+        }
 
         objetoPlanilla.observacion=this.planillaForm.get('nota').value;
         objetoPlanilla.comentario=this.planillaForm.get('comentario').value;

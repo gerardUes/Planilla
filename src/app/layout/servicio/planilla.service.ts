@@ -16,6 +16,8 @@ export class PlanillaService {
 
   private objetoPlanillaService:ProgramacionPla;
 
+  private banderaInicio:boolean;
+
 
   constructor(private http:HttpClient) {
 
@@ -37,7 +39,7 @@ export class PlanillaService {
 
 
   obtenerDetalleHorasExtras(cia:any,anio:any,mes:any,tipo:any,numpla:any,orden:any):Observable<any>{
-    return this.http.get(this.baseUrl+'find-detalle-resumen-by-programacion-pla/'+cia+'/'+anio+'/'+mes+'/'+tipo+'/'+numpla+'/'+orden).pipe(catchError(this.handleError));
+    return this.http.get(this.baseUrl+'find-hx-by-programacion-pla-det/'+cia+'/'+anio+'/'+mes+'/'+tipo+'/'+numpla+'/'+orden).pipe(catchError(this.handleError));
   }
 
 
@@ -117,6 +119,13 @@ obtenerPlanillas(mes:any,anio:any):Observable<any>{
     this.objetoPlanillaService = val;
   }
 
+  public get getBanderaInicio(){
+      return this.banderaInicio;
+  }
+
+  public set setBanderaInicio(valores){
+    this.banderaInicio=valores;
+  }
 
 
 }

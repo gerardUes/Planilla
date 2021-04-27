@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
+import { PlanillaService } from '../../servicio/planilla.service';
 
 @Component({
     selector: 'app-header',
@@ -10,12 +11,14 @@ import { TranslateService } from '@ngx-translate/core';
 export class HeaderComponent implements OnInit {
     public pushRightClass: string;
 
-    constructor(private translate: TranslateService, public router: Router) {
+    constructor(private translate: TranslateService, public router: Router,private servicio:PlanillaService) {
         this.router.events.subscribe((val) => {
             if (val instanceof NavigationEnd && window.innerWidth <= 992 && this.isToggled()) {
                 this.toggleSidebar();
             }
         });
+
+        this.servicio.setBanderaInicio=false;
     }
 
     ngOnInit() {
@@ -44,4 +47,12 @@ export class HeaderComponent implements OnInit {
     changeLang(language: string) {
         this.translate.use(language);
     }
+
+
+
+modificarEdicion(){
+    this.servicio.setBanderaInicio=false;
+}
+
+
 }

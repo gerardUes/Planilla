@@ -5,14 +5,12 @@
                 <legend class="the-legend text-center">Gestion de Programacion de Planilla</legend>
                 <div class="card-body">
                     <div class="row">
-                        <div class="form-group col-sm-4 col-xs-12">
-                            <label>Tipo de Planilla:</label>
+                        <div class="form-group col-sm-3 col-xs-12">
+                            <label>Tipo de Planilla</label>
 
                             <div class="input-group">
-                                <div class="input-group-prepend">
-                                    <span class="input-group-text"><i class="fa fa-user-circle"></i></span>
-                                </div>
-
+                                <span class="input-group-text border-left-0 rounded-right bg-white" id="basic-addon1"><i
+                                    class="fa fa-user-circle"></i></span>
                                     <select formControlName='codTipopla' class="form-control" >
                                         <option [value]="tipo.tiposPlanillaPK.codTipopla" *ngFor="let tipo of listaTipoPlanilla">{{tipo.nomTipopla}}</option>
                                     </select>
@@ -22,21 +20,22 @@
 
                         </div>
 
-                        <div class="form-group col-sm-4 col-xs-12">
-                            <label>Año:</label>
+                        <div class="form-group col-sm-3 col-xs-12">
+                            <label>Año</label>
 
                             <div class="input-group">
-                                <div class="input-group-prepend">
-                                    <span class="input-group-text"><i class="fa fa-user-circle"></i></span>
-                                </div>
+                                <span class="input-group-text border-left-0 rounded-right bg-white" id="basic-addon1"><i
+                                    class="fa fa-user-circle"></i></span>
                                 <input type="text" mask="0000" formControlName='anio' class="form-control float-right"  />
                             </div>
 
                         </div>
-                        <div class="form-group col-sm-4 col-xs-12">
-                            <label>Mes:</label>
+                        <div class="form-group col-sm-3 col-xs-12">
+                            <label>Mes</label>
 
                             <div class="input-group">
+                                <span class="input-group-text border-left-0 rounded-right bg-white" id="basic-addon1"><i
+                                    class="fa fa-user-circle"></i></span>
                                 <select class="form-control" formControlName='mese' >
                                     <option [value]="mes.valor" *ngFor="let mes of meses">{{mes.mes}}</option>
                                 </select>
@@ -44,13 +43,12 @@
 
                         </div>
 
-                        <div class="form-group col-sm-4 col-xs-12">
-                            <label>Periodo:</label>
+                        <div class="form-group col-sm-3 col-xs-12">
+                            <label>Periodo</label>
 
                             <div class="input-group">
-                                <div class="input-group-prepend">
-                                    <span class="input-group-text"><i class="fa fa-user-circle"></i></span>
-                                </div>
+                                <span class="input-group-text border-left-0 rounded-right bg-white" id="basic-addon1"><i
+                                    class="fa fa-user-circle"></i></span>
                                 <select class="form-control" formControlName='periodo' >
                                     <option [value]="pe.codigo" *ngFor="let pe of periodo">{{pe.valor}}</option>
                                 </select>
@@ -58,10 +56,10 @@
 
                         </div>
 
-                        <div class="form-group col-sm-4 col-xs-12">
+                        <div class="form-group col-sm-3 col-xs-12">
                             <label>Fecha Inicial</label>
                             <div class="input-group">
-                              <input class="form-control" placeholder="yyyy-mm-dd"
+                              <input class="form-control"
                                      name="dp" [(ngModel)]="fechaInicial" ngbDatepicker #d="ngbDatepicker" [ngModelOptions]="{standalone: true}" >
                               <div class="input-group-append">
                                 <button class="btn btn-outline-secondary fa fa-calendar" (click)="d.toggle()" type="button"></button>
@@ -69,10 +67,10 @@
                             </div>
                           </div>
 
-                          <div class="form-group col-sm-4 col-xs-12">
+                          <div class="form-group col-sm-3 col-xs-12">
                             <label>Fecha Final</label>
                             <div class="input-group">
-                              <input class="form-control" placeholder="yyyy-mm-dd"
+                              <input class="form-control"
                                      [(ngModel)]="fechaFinal" ngbDatepicker #d1="ngbDatepicker" [ngModelOptions]="{standalone: true}" >
                               <div class="input-group-append">
                                 <button class="btn btn-outline-secondary fa fa-calendar" (click)="d1.toggle()" type="button"></button>
@@ -80,21 +78,10 @@
                             </div>
                           </div>
 
-                          <div class="form-group col-sm-4 col-xs-12">
-                            <label>Fecha de pago</label>
-                            <div class="input-group">
-                              <input class="form-control" placeholder="yyyy-mm-dd"
-                                      [(ngModel)]="fechaPago" ngbDatepicker #d2="ngbDatepicker" [ngModelOptions]="{standalone: true}" >
-                              <div class="input-group-append">
-                                <button class="btn btn-outline-secondary fa fa-calendar" (click)="d2.toggle()" type="button"></button>
-                              </div>
-                            </div>
-                          </div>
-
-                          <div class="form-group col-sm-4 col-xs-12">
+                          <div class="form-group col-sm-3 col-xs-12">
                             <label>Fecha Inicial HX</label>
                             <div class="input-group">
-                              <input class="form-control" placeholder="yyyy-mm-dd"
+                              <input class="form-control"
                                       [(ngModel)]="fechaInicialHX" ngbDatepicker #d3="ngbDatepicker" [ngModelOptions]="{standalone: true}" >
                               <div class="input-group-append">
                                 <button class="btn btn-outline-secondary fa fa-calendar" (click)="d3.toggle()" type="button"></button>
@@ -103,10 +90,10 @@
                           </div>
 
 
-                          <div class="form-group col-sm-4 col-xs-12">
+                          <div class="form-group col-sm-3 col-xs-12">
                             <label>Fecha Final HX</label>
                             <div class="input-group">
-                              <input class="form-control" placeholder="yyyy-mm-dd"
+                              <input class="form-control"
                                       [(ngModel)]="fechaFinalHX" ngbDatepicker #d4="ngbDatepicker" [ngModelOptions]="{standalone: true}" >
                               <div class="input-group-append">
                                 <button class="btn btn-outline-secondary fa fa-calendar" (click)="d4.toggle()" type="button"></button>
@@ -114,22 +101,11 @@
                             </div>
                           </div>
 
-                          <div class="form-group col-sm-3 col-xs-12">
-                            <label>Dias Proyectar:</label>
 
-                            <div class="input-group">
-                                <div class="input-group-prepend">
-                                    <span class="input-group-text"><i class="fa fa-user-circle"></i></span>
-                                </div>
-                                <input type="text" formControlName='proyectar' class="form-control float-right"  />
-                            </div>
-
-                        </div>
-
-                        <div class="form-group col-sm-4 col-xs-12">
+                        <div class="form-group col-sm-3 col-xs-12">
                             <label>Fecha Inicial Noc</label>
                             <div class="input-group">
-                              <input class="form-control" placeholder="yyyy-mm-dd"
+                              <input class="form-control"
                                       [(ngModel)]="fechaInicialNoc" ngbDatepicker #d5="ngbDatepicker" [ngModelOptions]="{standalone: true}" >
                               <div class="input-group-append">
                                 <button class="btn btn-outline-secondary fa fa-calendar" (click)="d5.toggle()" type="button"></button>
@@ -138,10 +114,10 @@
                           </div>
 
 
-                          <div class="form-group col-sm-4 col-xs-12">
+                          <div class="form-group col-sm-3 col-xs-12">
                             <label>Fecha Final Noc</label>
                             <div class="input-group">
-                              <input class="form-control" placeholder="yyyy-mm-dd"
+                              <input class="form-control"
                                       [(ngModel)]="fechaFinalNoc" ngbDatepicker #d6="ngbDatepicker" [ngModelOptions]="{standalone: true}" >
                               <div class="input-group-append">
                                 <button class="btn btn-outline-secondary fa fa-calendar" (click)="d6.toggle()" type="button"></button>
@@ -150,35 +126,9 @@
                           </div>
 
                           <div class="form-group col-sm-3 col-xs-12">
-                            <label>Descontar Prestamo:</label>
-
-                            <div class="input-group">
-                                <select formControlName='descontar' class="form-control">
-                                    <option value="1">Si</option>
-                                    <option value="2">No</option>
-                                  </select>
-                            </div>
-
-                        </div>
-
-
-
-                        <div class="form-group col-sm-4 col-xs-12">
-                            <label>Dividir Cuota:</label>
-
-                            <div class="input-group">
-                                <select formControlName='cuota' class="form-control">
-                                    <option value="1">Si</option>
-                                    <option value="2">No</option>
-                                  </select>
-                            </div>
-
-                        </div>
-
-                        <div class="form-group col-sm-4 col-xs-12">
                             <label>Fecha Inicio Alim</label>
                             <div class="input-group">
-                              <input class="form-control" placeholder="yyyy-mm-dd"
+                              <input class="form-control"
                                       [(ngModel)]="fechaInicialAlimento" ngbDatepicker #d7="ngbDatepicker" [ngModelOptions]="{standalone: true}" >
                               <div class="input-group-append">
                                 <button class="btn btn-outline-secondary fa fa-calendar" (click)="d7.toggle()" type="button"></button>
@@ -189,7 +139,7 @@
                           <div class="form-group col-sm-3 col-xs-12">
                             <label>Fecha Fin Alim</label>
                             <div class="input-group">
-                              <input class="form-control" placeholder="yyyy-mm-dd"
+                              <input class="form-control"
                                       [(ngModel)]="fechaFinAlimento" ngbDatepicker #d8="ngbDatepicker" [ngModelOptions]="{standalone: true}" >
                               <div class="input-group-append">
                                 <button class="btn btn-outline-secondary fa fa-calendar" (click)="d8.toggle()" type="button"></button>
@@ -197,11 +147,57 @@
                             </div>
                           </div>
 
-                          <div class="form-group col-sm-9 col-xs-12">
-                            <label>Comentario:</label>
+
+                          <div class="form-group col-sm-3 col-xs-12">
+                            <label>Fecha de pago</label>
+                            <div class="input-group">
+                              <input class="form-control"
+                                      [(ngModel)]="fechaPago" ngbDatepicker #d2="ngbDatepicker" [ngModelOptions]="{standalone: true}" >
+                              <div class="input-group-append">
+                                <button class="btn btn-outline-secondary fa fa-calendar" (click)="d2.toggle()" type="button"></button>
+                              </div>
+                            </div>
+                          </div>
+
+
+                          <div class="form-group col-sm-3 col-xs-12">
+                            <label>Dias Proyectar</label>
 
                             <div class="input-group">
-                                <textarea type="text" formControlName='comentario' class="form-control float-right"  cols="12" rows="2"></textarea>
+                                <span class="input-group-text border-left-0 rounded-right bg-white" id="basic-addon1"><i
+                                    class="fa fa-user-circle"></i></span>
+                                <input type="text" formControlName='proyectar' class="form-control float-right"  />
+                            </div>
+
+                        </div>
+
+
+                          <div class="form-group col-sm-3 col-xs-12">
+                            <label>Descontar Prestamo</label>
+
+                            <div class="input-group">
+                                <span class="input-group-text border-left-0 rounded-right bg-white" id="basic-addon1"><i
+                                    class="fa fa-user-circle"></i></span>
+                                <select formControlName='descontar' class="form-control">
+                                    <option value="1">Si</option>
+                                    <option value="2">No</option>
+                                  </select>
+                            </div>
+
+                        </div>
+
+
+
+                        <div class="form-group col-sm-3 col-xs-12">
+                            <label>Dividir Cuota</label>
+
+                            <div class="input-group">
+                                <span class="input-group-text border-left-0 rounded-right bg-white" id="basic-addon1"><i
+                                    class="fa fa-user-circle"></i></span>
+                                <select formControlName='cuota' class="form-control">
+                                    <option value="1">Si</option>
+                                    <option value="2">No</option>
+                                  </select>
                             </div>
 
                         </div>
@@ -210,21 +206,22 @@
 
 
                         <div class="form-group col-sm-3 col-xs-12">
-                            <label>Año reportar prestamo:</label>
+                            <label>Año reportar prestamo</label>
 
                             <div class="input-group">
-                                <div class="input-group-prepend">
-                                    <span class="input-group-text"><i class="fa fa-user-circle"></i></span>
-                                </div>
+                                <span class="input-group-text border-left-0 rounded-right bg-white" id="basic-addon1"><i
+                                    class="fa fa-user-circle"></i></span>
                                 <input type="text" formControlName='anioPrestamo' class="form-control float-right"  />
                             </div>
 
                         </div>
 
                         <div class="form-group col-sm-3 col-xs-12">
-                            <label>Mes reportar prestamo:</label>
+                            <label>Mes reportar prestamo</label>
 
                             <div class="input-group">
+                                <span class="input-group-text border-left-0 rounded-right bg-white" id="basic-addon1"><i
+                                    class="fa fa-user-circle"></i></span>
                                 <select class="form-control" formControlName='mesPrestamo' >
                                     <option [value]="mes.valor" *ngFor="let mes of meses">{{mes.mes}}</option>
                                 </select>
@@ -234,21 +231,34 @@
 
 
                         <div class="form-group col-sm-3 col-xs-12">
-                            <label>Factor Cambiario:</label>
+                            <label>Factor Cambiario</label>
 
                             <div class="input-group">
-                                <div class="input-group-prepend">
-                                    <span class="input-group-text"><i class="fa fa-user-circle"></i></span>
-                                </div>
+                                <span class="input-group-text border-left-0 rounded-right bg-white" id="basic-addon1"><i
+                                    class="fa fa-user-circle"></i></span>
                                 <input type="text" formControlName='factorCambiario' class="form-control float-right" id="reservationtime" />
                             </div>
 
                         </div>
 
-                        <div class="form-group col-sm-9 col-xs-12">
-                            <label>Nota:</label>
+                        <div class="form-group col-sm-6 col-xs-12">
+                            <label>Comentario</label>
 
                             <div class="input-group">
+                                <span class="input-group-text border-left-0 rounded-right bg-white" id="basic-addon1"><i
+                                    class="fa fa-user-circle"></i></span>
+                                <textarea type="text" formControlName='comentario' class="form-control float-right"  cols="12" rows="2"></textarea>
+                            </div>
+
+                        </div>
+
+
+                        <div class="form-group col-sm-6 col-xs-12">
+                            <label>Nota</label>
+
+                            <div class="input-group">
+                                <span class="input-group-text border-left-0 rounded-right bg-white" id="basic-addon1"><i
+                                    class="fa fa-user-circle"></i></span>
                                 <textarea type="text" formControlName='nota' class="form-control float-right"  cols="12" rows="2"></textarea>
                             </div>
 
@@ -259,11 +269,12 @@
 
 
                     </div>
+
                 </div>
 
 
                 <div class="card-footer">
-                    <button type="button"  (click)="guardarPlanilla()" class="btn btn-primary">Guardar</button>
+                    <button type="button"  (click)="guardarPlanilla()" class="btn btn-primary"><i class="fa fa-pencil" aria-hidden="true"></i> &nbsp; Guardar Cambios</button>
                 </div>
             </fieldset>
         </form>

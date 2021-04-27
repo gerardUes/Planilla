@@ -1,0 +1,62 @@
+<div class="row my-4">
+<button class="btn btn-primary" data-toggle="modal" data-target="#modal">
+Agregar
+</button>
+</div>
+
+<div class="row my-2">
+    <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">Nombre institución</th>
+            <th scope="col">Título/Nivel obtenido</th>
+            <th scope="col">Año ingreso</th>
+            <th scope="col">Año egreso</th>
+            <th scope="col">No.Colegiado</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let item of listaAcademico">
+            <th scope="row">{{item.nombreInstituto}}</th>
+            <td>{{item.titulo}}</td>
+            <td>{{item.anioIngre}}</td>
+            <td>{{item.anioEgre}}</td>
+            <td>{{item.colegiado}}</td>
+        <td>
+            <button class="btn btn-danger">
+                Eliminar
+            </button>
+        </td>
+          </tr>
+        </tbody>
+      </table>
+</div>
+
+
+
+
+<!-- modal de agregar -->
+<div id="modal"  class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+            <h6 class="modal-title">Formulario </h6>
+            <button type="button" class="btn btn-outline-danger btn-sm" data-dismiss="modal">×</button>
+        </div>
+        <div class="modal-body">
+            <form>
+                <div class="form-group">
+                  <label for="exampleInputEmail1">Profesiones</label>
+                  <select class="form-control"  >
+                    <option value="item.nombreInstituto" *ngFor="let item of listaAcademico" >{{item.nombreInstituto}}</option>
+                  </select>
+                </div>
+                
+                <button type="submit" class="btn btn-primary">Submit</button>
+              </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+<!--fin modal agregar-->

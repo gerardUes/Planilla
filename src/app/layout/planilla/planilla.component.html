@@ -315,6 +315,34 @@
             </div>
         </div>
     </div>
+
+    <div class="col-xl-6 text-xs-center">
+        <div class="card mb-3">
+            <div class="card-header" style="background-color:blue;color: white;">
+                <h5>Resumen  Deducciones no Aplicados</h5>
+            </div>
+            <div class="card-body">
+                <div class="table-responsive" style="height:500px;overflow:scroll;">
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th scope="col">Accion</th>
+                                <th scope="col" style="text-align: right;" >Totales</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td></td> 
+                            </tr>
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
 </div>
 
 
@@ -740,10 +768,16 @@
                 <form class="form-inline" >
                     <div class="form-group mb-2">
                       <label><strong>TIPO BOLETA:</strong></label>
-                      <select  class="form-control" (change)="onChangeFormato($event.target.value)" data-toggle="modal" data-target="#reporteBoleta">
-                        <option value="N">Selecione</option>
+                      <select  class="form-control"  (change)="llenarNombre($event.target.value)" >
+                          <option value="N">----SELECCIONE-----</option>
                         <option  *ngFor="let item of listaFormatoReportes" [value]="item.archivo">{{item.nombreReporte}}</option>
                       </select>
+                    </div>
+
+                    <div class="form-inline">
+                          <button class="btn btn-primary" (click)="onChangeFormato()" data-toggle="modal" data-target="#reporteBoleta" >
+                            <i class="fa fa-print" aria-hidden="true"></i>&nbsp;Imprimir
+                          </button>  
                     </div>
 
                   </form>

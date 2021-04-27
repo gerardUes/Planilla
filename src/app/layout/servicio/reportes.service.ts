@@ -13,6 +13,8 @@ export class ReportesService {
 
   baseUrlParametros:any='http://138.128.245.244:8447/infosweb/api/v1/core/parametros/';
 
+  baseUrlPlanilla:any='http://138.128.245.244:8445/infosweb/api/v1/rrhh/planilla/';
+
   constructor(private http:HttpClient) { }
 
 
@@ -54,7 +56,7 @@ export class ReportesService {
 
 
   generarReporteBoletas(cia:any,anio:any,secuencia:any,tipo:any,nombre:string):Observable<any>{
-    return this.http.get(this.baseUrl+'reportes/generar-boletas-pago/'+cia+'/'+anio+'/'+secuencia+'/'+tipo+'/'+nombre).pipe(catchError(this.handleError));
+    return this.http.get('http://138.128.245.244:8445/infosweb/api/v1/rrhh/planilla/reportes/generar-boletas-pago/'+cia+'/'+anio+'/'+secuencia+'/'+tipo+'/'+nombre).pipe(catchError(this.handleError));
   }
 
 

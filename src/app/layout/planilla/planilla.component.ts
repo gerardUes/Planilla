@@ -18,6 +18,8 @@ import { DomSanitizer } from '@angular/platform-browser';
     styleUrls: ['./planilla.component.css']
 })
 export class PlanillaComponent implements OnInit {
+
+    nombre:string;
     pdfDeduc:any;
     pdfCertificacion:any;
     pdfEfectivo:any;
@@ -82,6 +84,9 @@ export class PlanillaComponent implements OnInit {
           );
 
           this.pdfEfectivo=this.domSanitizer.bypassSecurityTrustResourceUrl(
+            ''
+          );
+          this.pdfBoleta=this.domSanitizer.bypassSecurityTrustResourceUrl(
             ''
           );
 
@@ -696,20 +701,23 @@ showCertificacion(datos: string) {
 
 
 
-  onChangeFormato(valor:any){
-      console.log('LO QUE VIENE:'+valor);
-
+  onChangeFormato(){
+    
       this.servicioReportes.generarReporteBoletas(this.servicio.objetoPlanillaServicio.programacionPlaPK.codCia,
         this.servicio.objetoPlanillaServicio.anio,this.servicio.objetoPlanillaServicio.programacionPlaPK.secuencia,
-        this.servicio.objetoPlanillaServicio.tiposPlanilla.tiposPlanillaPK.codTipopla,valor).subscribe(
+        this.servicio.objetoPlanillaServicio.tiposPlanilla.tiposPlanillaPK.codTipopla,this.nombre).subscribe(
             data=>{
-                //console.log('Respuesta blobUrl:'+JSON.stringify(data));
+                console.log('Respuesta boleta:'+JSON.stringify(data));
                this.mostrarReporteBoleta(data.archivo);
             }
         );
 
   }
 
+
+  llenarNombre(valor:string){
+    this.nombre=valor;
+  }
 
 
 
